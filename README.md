@@ -10,10 +10,10 @@
 
 ## Developers
 
- - Alber Chica - @AlCH440
- - Carlos Godoy - @3cgn8
- - Pau Garcia - @PaGaQi
- - Ogylandy Yespagambetov - Oga29
+ - Alber Chica - [@AlCH440]
+ - Carlos Godoy - [@3cgn8]
+ - Pau Garcia - [@PaGaQi]
+ - Ogylandy Yespagambetov - [@Oga29]
 
 ## License
 
