@@ -19,23 +19,23 @@ public:
 	virtual ~Player();
 
 	// Called before render is available
-	//bool Awake(pugi::xml_node&);
+	bool Awake(pugi::xml_node&);
 
 	// Called before the first frame
 	bool Start();
 
 	// Called each loop iteration
-	//bool PreUpdate();
+	bool PreUpdate();
 
 	// Called each loop iteration
-	bool Update();
+	bool Update(float dt);
 
 	// Called each loop iteration
 	bool PostUpdate();
 
 
 	// Called before quitting
-	//virtual bool CleanUp();
+	virtual bool CleanUp();
 	/*
 
 	// Collision callback, called when the player intersects with another collider
@@ -45,28 +45,34 @@ public:
 	// Position of the player in the map
 	int position_x;
 	int position_y;
-
+	bool move;
+	int direction;
+	int moveAction;
 	// The speed in which we move the player (pixels per frame)       NEED TO CALCULATE
-	int step = 1;
+	int step = 16;
 
 	// The player spritesheet loaded into an SDL_Texture
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* spriteSheet = nullptr;
 
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
+	Animation StillUpAnim;
+	Animation StillDownAnim;
+	Animation StillLeftAnim;
+	Animation StillRightAnim;
 	Animation upAnim;
 	Animation downAnim;
 	Animation leftAnim;
 	Animation rightAnim;
+	SDL_Rect playerStill;
 
 	// The player's collider
-	Collider* collider = nullptr;
+	//Collider* collider = nullptr;
 
-	// A counter of the player Steps
+	// The counter of the player Steps
 	int playerSteps;
 
 	// Sound effects indices								???????????????????????????????????

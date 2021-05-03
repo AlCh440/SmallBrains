@@ -8,20 +8,34 @@
 #include "Scene.h"
 
 #include "Log.h"
+#include "iostream"
 
 
 
 
 Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!!!!!!!!!
 {
-	// idle animation - just one sprite
-	idleAnim.PushBack({ 66, 1, 32, 14 });
+	// Still
+	StillUpAnim.PushBack({ 5, 320, 64, 102 });
+	StillDownAnim.PushBack({ 5, 5, 64, 93 });
+	StillLeftAnim.PushBack({ 5, 104, 64, 102 });
+	StillRightAnim.PushBack({ 5, 212, 64, 102 });
 
 	// move upwards
-	upAnim.PushBack({ 100, 1, 32, 14 });
-	upAnim.PushBack({ 132, 0, 32, 14 });
+	for (int i = 0; i < 2; i++)	upAnim.PushBack({ 5, 315, 64, 102 });
+	for (int i = 0; i < 2; i++)	upAnim.PushBack({ 75, 315, 64, 102 });
+	for (int i = 0; i < 2; i++) upAnim.PushBack({ 145, 315, 64, 102 });
+	for (int i = 0; i < 2; i++)	upAnim.PushBack({ 145, 315, 64, 102 });
+	for (int i = 0; i < 2; i++)	upAnim.PushBack({ 215, 315, 64, 102 });
+	for (int i = 0; i < 2; i++)	upAnim.PushBack({ 285, 315, 64, 102 });
+	for (int i = 0; i < 2; i++) upAnim.PushBack({ 355, 315, 64, 102 });
+	for (int i = 0; i < 2; i++)	upAnim.PushBack({ 425, 315, 64, 102 });
+
+	
+	
+
 	upAnim.loop = false;
-	upAnim.speed = 0.1f;
+	upAnim.speed = 1.0f;
 
 	// Move down
 	downAnim.PushBack({ 33, 1, 32, 14 });
@@ -33,11 +47,21 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 	leftAnim.PushBack({ });
 	leftAnim.loop = false;
 	leftAnim.speed = 0.1f;
+
+	currentAnimation = &StillUpAnim;
+	playerStill = { 5, 5, 54, 93 };
+	move = true;
+	moveAction = 0;
 }
 
 Player::~Player()
 {
 
+}
+
+bool Player::Awake(pugi::xml_node& config)
+{
+	return true;
 }
 
 bool Player::Start()
@@ -46,65 +70,99 @@ bool Player::Start()
 
 	bool ret = true;
 	
-	texture = app->tex->Load("Assets/Textures/test.png");
-	currentAnimation = &idleAnim;
+	spriteSheet = app->tex->Load("Assets/Textures/updatedSpritesheet.png");
 
-	position_x = 150;
-	position_y = 120;
 
+	position_x = 0.0f;
+	position_y = 0.0f;
+	playerSteps = 0;
+	direction = 1;
 	//collider = app->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
 	return ret;
 }
 
-bool Player::Update()
+bool Player::PreUpdate()
 {
-	
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
-	{
-		position_x -= step;
-	}
+	return true;
+}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+bool Player::Update(float dt)
+{
+	if (move)
 	{
-		position_x += step;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-	{
-		position_y -= step;
-	}
-
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-	{
-		position_y += step;
-	}
-
-	
-	/*	if (currentAnimation != &downAnim)
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-		} */
+			direction = 3; // Left
+			move = false;
+			currentAnimation = &leftAnim;
+		}
 
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
+		{
+			direction = 4; // Right
+			move = false;
+			currentAnimation = &rightAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+		{
+			direction = 1; // Up
+			move = false;
+			currentAnimation = &upAnim;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+		{
+			direction = 2; // Down
+			move = false;
+			currentAnimation = &downAnim;
+		}
+	}
+	else if ((moveAction < step) && (!move))
+	{
+		moveAction++;
+		if (direction == 1) position_y -= 1;
+		else if (direction == 2) position_y += 1;
+		else if (direction == 3) position_x -= 1;
+		else if (direction == 4) position_x += 1;
+	}
+	else if (moveAction == step)
+	{
+		move = true;
+		moveAction = 0;
+	}
 
 	// If no up/down movement detected, set the current animation back to idle
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE
-		&& app->input->GetKey(SDL_SCANCODE_W) == KEY_IDLE
-		&& app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE
-		&& app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE)
-		currentAnimation = &idleAnim;
+
+	
 
 	//collider->SetPos(position.x, position.y);																	COLLIDEEEEEEEER
 
 	currentAnimation->Update();
+	
+	app->render->DrawTexture(spriteSheet, position_x, position_y, &currentAnimation->GetCurrentFrame());
+	/*if (currentAnimation == &idleAnim)
+	{
+		app->render->DrawTexture(spriteSheet, position_x, position_y, upAnim.frames);
+	}
+	else
+	{
+		app->render->DrawTexture(spriteSheet, position_x, position_y, &playerStill, 1.0f);
+	}*/
+	
+	
 
 	return true;
 }
 
 bool Player::PostUpdate()
 {
-	
+	return true;
+}
+
+bool Player::CleanUp()
+{
 	return true;
 }
 
