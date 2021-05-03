@@ -17,10 +17,10 @@
 
 ## Developers
 
- - {Dev01} - {Role(s)}
- - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - Alber Chica - Programmer
+ - Carlos Godoy - Programmer
+ - Pau Garcia - Artist
+ - Ogylandy Yespagambetov - Game and sound Designer (KEKW)
 
 ## License
 
