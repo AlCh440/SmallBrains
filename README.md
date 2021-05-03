@@ -3,27 +3,18 @@
 ## Description
 
 {project description}
-
-## Key Features
-
- - {Feature01}
- - {Feature02}
- - {Feature03}
- - {Feature04}
  
-## Controls
+## How to play
 
  - {ControlsScheme}
 
 ## Developers
 
- - Alber Chica - Programmer
- - Carlos Godoy - Programmer
- - Pau Garcia - Artist
- - Ogylandy Yespagambetov - Game and sound Designer (KEKW)
+ - Alber Chica - @AlCH440
+ - Carlos Godoy - @3cgn8
+ - Pau Garcia - @PaGaQi
+ - Ogylandy Yespagambetov - Oga29
 
 ## License
 
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
-
-{AdditionalLicenses}
