@@ -60,10 +60,7 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation StillUpAnim;
-	Animation StillDownAnim;
-	Animation StillLeftAnim;
-	Animation StillRightAnim;
+	Animation StillAnim;
 	Animation upAnim;
 	Animation downAnim;
 	Animation leftAnim;

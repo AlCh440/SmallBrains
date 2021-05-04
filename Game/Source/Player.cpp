@@ -20,9 +20,9 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 {
 	// Still
 
-	StillRightAnim.PushBack({ 5, 212, 64, 102 });
+	StillAnim.PushBack({ 1, 45, 14, 22});
 
-	StillRightAnim.loop = false;
+	StillAnim.loop = false;
 	// move up
 	upAnim.PushBack({ 1, 68, 14, 22 });
 	upAnim.PushBack({ 16, 68, 14, 22 });
@@ -86,7 +86,7 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 	// move left
 	
 	
-	currentAnimation = &StillRightAnim;
+	currentAnimation = &StillAnim;
 	move = true;
 	moveAction = 0;
 }

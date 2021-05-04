@@ -38,6 +38,7 @@ public:
 	bool introMusic;
 
 	SDL_Texture* introMenu;
+	SDL_Texture* smallbrainsIntro;
 
 	int backgroundLvl1[11][11] =
 	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},

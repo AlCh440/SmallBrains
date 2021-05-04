@@ -12,7 +12,7 @@
 
 LevelManager::LevelManager()
 {
-	level = 0;
+	level = -1;
 	framesCounter = 0;
 	introMusic = true;
 }
@@ -34,14 +34,21 @@ bool LevelManager::Update(float dt)
 	if (introMusic)
 	{
 		introMenu = app->tex->Load("Assets/Textures/super_soukoban_intro.png");
-		std::cout << "a";
+		smallbrainsIntro = app->tex->Load("Assets/Textures/small_brains_intro.png");
+
 		app->audio->PlayMusic("Assets/Audio/Music/02_title_screen.ogg", 1.0f);
 	}
 	introMusic = false;
 
-	if (level == 0) 
+	if (level == -1)
+	{
+		app->render->DrawTexture(smallbrainsIntro, 0, 0);
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) lvlChange(0);
+	}
+	else if (level == 0) 
 	{
 		app->render->DrawTexture(introMenu, 16, 0);
+		framesCounter++;
 	}
 	else if (level == 1)
 	{
@@ -50,7 +57,7 @@ bool LevelManager::Update(float dt)
 	}
 
 
-	framesCounter++;
+
 	if (framesCounter > 15000) lvlChange(1);
 	return true;
 }
