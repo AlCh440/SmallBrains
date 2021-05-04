@@ -2,7 +2,7 @@
 
 ## Description
 
-This game is a replica of the game for snes super soukoban, created by the [SmallBrains](https://github.com/AlCh440/SmallBrains) team.
+This game is a replica of the game for SNES Super Soukoban, created by  [SmallBrains](https://github.com/AlCh440/SmallBrains).
  
 ## How to play
 
