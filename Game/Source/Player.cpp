@@ -131,87 +131,89 @@ bool Player::LevelStart(int level)
 
 bool Player::Update(float dt)
 {
-	if (move)
+	if (app->levelManager->Getlvl() == 1)
 	{
-		if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (position_x - 24 >= 0))
+		if (move)
 		{
-			direction = 3; // Left
-			move = false;
-			leftAnim.Reset();
-			currentAnimation = &leftAnim;
-			stepCount++;
+			if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (position_x - 24 >= 0))
+			{
+				direction = 3; // Left
+				move = false;
+				leftAnim.Reset();
+				currentAnimation = &leftAnim;
+				stepCount++;
+			}
+
+			if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (position_x + 24 <= 264))
+			{
+				direction = 4; // Right
+				move = false;
+				rightAnim.Reset();
+				currentAnimation = &rightAnim;
+				stepCount++;
+			}
+
+			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (position_y - 24 >= 0))
+			{
+				direction = 1; // Up
+				move = false;
+				upAnim.Reset();
+				currentAnimation = &upAnim;
+				stepCount++;
+			}
+
+			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (position_y + 48 <= 264))
+			{
+				direction = 2; // Down
+				move = false;
+				downAnim.Reset();
+				currentAnimation = &downAnim;
+				stepCount++;
+			}
+		}
+		else if ((moveAction < step) && (!move))
+		{
+			moveAction += 1;
+			if (direction == 1)
+			{
+				position_y -= 0.1f;
+			}
+			else if (direction == 2)
+			{
+				position_y += 0.1f;
+			}
+			else if (direction == 3)
+			{
+				position_x -= 0.1f;
+			}
+			else if (direction == 4)
+			{
+				position_x += 0.1f;
+
+			}
+		}
+		else if (moveAction >= step)
+		{
+			move = true;
+			moveAction = 0;
 		}
 
-		if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (position_x + 24 <= 264))
-		{
-			direction = 4; // Right
-			move = false;
-			rightAnim.Reset();
-			currentAnimation = &rightAnim;
-			stepCount++;
-		}
+		app->collisions->AddCollider({ (int)position_x, (int)position_y, 24, 24 }, Collider::Type::PLAYER, this);
 
-		if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (position_y - 24 >= 0))
-		{
-			direction = 1; // Up
-			move = false;
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-			stepCount++;
-		}
+		//app->collisions->AddCollider({ (int)position_x + 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
+		//app->collisions->AddCollider({ (int)position_x - 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
+		//app->collisions->AddCollider({ (int)position_x, (int)position_y - 24, 24, 24 }, Collider::Type::NEAR, this);
+		//app->collisions->AddCollider({ (int)position_x, (int)position_y + 24, 24, 24 }, Collider::Type::NEAR, this);
 
-		if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (position_y + 48 <= 264))
-		{
-			direction = 2; // Down
-			move = false;
-			downAnim.Reset();
-			currentAnimation = &downAnim;
-			stepCount++;
-		}
+		//collider->SetPos(position.x, position.y);	
+
+		currentAnimation->Update();
+
+		app->render->DrawTexture(spriteSheet, position_x, position_y, &currentAnimation->GetCurrentFrame());
+
+
+
 	}
-	else if ((moveAction < step) && (!move))
-	{
-		moveAction += 1;
-		if (direction == 1)
-		{
-			position_y -= 0.1f;
-		}
-		else if (direction == 2)
-		{
-			position_y += 0.1f;
-		}
-		else if (direction == 3)
-		{
-			position_x -= 0.1f;
-		}
-		else if (direction == 4)
-		{
-			position_x += 0.1f;
-			
-		}
-	}
-	else if (moveAction >= step)
-	{
-		move = true;
-		moveAction = 0;
-	}
-
-	app->collisions->AddCollider({ (int)position_x, (int)position_y, 24, 24 }, Collider::Type::PLAYER, this);
-
-	//app->collisions->AddCollider({ (int)position_x + 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
-	//app->collisions->AddCollider({ (int)position_x - 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
-	//app->collisions->AddCollider({ (int)position_x, (int)position_y - 24, 24, 24 }, Collider::Type::NEAR, this);
-	//app->collisions->AddCollider({ (int)position_x, (int)position_y + 24, 24, 24 }, Collider::Type::NEAR, this);
-
-	//collider->SetPos(position.x, position.y);	
-
-	currentAnimation->Update();
-	
-	app->render->DrawTexture(spriteSheet, position_x, position_y, &currentAnimation->GetCurrentFrame());
-	
-	
-	
-
 	return true;
 }
 

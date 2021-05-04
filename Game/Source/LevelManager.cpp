@@ -25,7 +25,7 @@ LevelManager::~LevelManager()
 
 bool LevelManager::Start()
 {
-	introMenu = app->tex->Load("Assets");
+	introMenu = app->tex->Load("Assets/Textures/super_soukoban_intro");
 	return true;
 }
 
@@ -33,18 +33,25 @@ bool LevelManager::Update(float dt)
 {
 	if (introMusic)
 	{
+		introMenu = app->tex->Load("Assets/Textures/super_soukoban_intro.png");
+		std::cout << "a";
 		app->audio->PlayMusic("Assets/Audio/Music/02_title_screen.ogg", 1.0f);
 	}
 	introMusic = false;
 
 	if (level == 0) 
 	{
+		app->render->DrawTexture(introMenu, 16, 0);
+	}
+	else if (level == 1)
+	{
+		app->tiles->DrawArray(*backgroundLvl1, 11, 11);
 
 	}
 
-	app->tiles->DrawArray(*backgroundLvl1, 11, 11);
 
 	framesCounter++;
+	if (framesCounter > 15000) lvlChange(1);
 	return true;
 }
 

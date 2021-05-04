@@ -39,11 +39,12 @@ bool BoxManager::Start()
 
 bool BoxManager::Update(float dt)
 {
-	 
-	box_01->Update(dt);
-	box_02->Update(dt);
-	box_03->Update(dt);
-	
+	if (app->levelManager->Getlvl() == 1)
+	{
+		box_01->Update(dt);
+		box_02->Update(dt);
+		box_03->Update(dt);
+	}
 	return true;
 }
 
