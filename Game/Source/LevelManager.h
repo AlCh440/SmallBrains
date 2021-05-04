@@ -35,8 +35,7 @@ public:
 
 	int win = 0;
 	int max_steps = 0;
-
-	char introMusic;
+	bool introMusic;
 
 	int backgroundLvl1[11][11] =
 	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},

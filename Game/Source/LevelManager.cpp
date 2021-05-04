@@ -14,7 +14,7 @@ LevelManager::LevelManager()
 {
 	level = 0;
 	framesCounter = 0;
-
+	introMusic = true;
 }
 
 
@@ -25,14 +25,19 @@ LevelManager::~LevelManager()
 
 bool LevelManager::Start()
 {
-	introMusic = app->audio->LoadFx("Assets/Audio/Fx/02_title_screen.wav");
+	
 
 	return true;
 }
 
 bool LevelManager::Update(float dt)
 {
-	app->audio->LoadFx(&introMusic);
+	if (introMusic)
+	{
+		introMusic = false;
+		app->audio->PlayMusic("Assets/Audio/Music/02_title_screen.ogg", 1.0f);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) app->boxManager->InitializeLvl1();
 	app->tiles->DrawArray(*backgroundLvl1, 11, 11);
 
