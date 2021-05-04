@@ -3,8 +3,8 @@
 
 #include "Module.h"
 #include "Audio.h"
-#include "SDL_mixer/include/SDL_mixer.h"
-#include "SDL/include/SDL.h"
+
+struct SDL_Texture;
 
 class LevelManager : public Module
 {
@@ -36,6 +36,8 @@ public:
 	int win = 0;
 	int max_steps = 0;
 	bool introMusic;
+
+	SDL_Texture* introMenu;
 
 	int backgroundLvl1[11][11] =
 	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
