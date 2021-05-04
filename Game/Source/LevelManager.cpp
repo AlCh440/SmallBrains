@@ -20,26 +20,19 @@ LevelManager::~LevelManager()
 
 bool LevelManager::Update(float dt)
 {
+	
 	app->tiles->DrawArray(*backgroundLvl1, 11, 11);
 	return true;
 }
 
-void LevelManager::lvlChange(int change, char op)
+void LevelManager::lvlChange(int change)
 {
-	switch (op) {
-	case '=':
-		level = change;
-		break;
-	case '+':
-		level += change;
-		break;
-	case '-':
-		level -= change;
-		break;
-	default:
-		break;
+	level = change;
+	if (level == 1) 
+	{
+		//Sett boxes !!!
+		//Sett player position !!!
 	}
-
 }
 
 
@@ -48,7 +41,7 @@ void LevelManager::Lose()
 {
 	win = 2;
 	if (app->input->GetKey(SDL_SCANCODE_SPACE)== KEY_DOWN) {
-		app->levelManager->lvlChange(1, '-');
+		app->levelManager->lvlChange(2);
 		//app->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
 
 		boxes_lvl = 0;
@@ -62,15 +55,12 @@ void LevelManager::LevelComplete()
 {
 	if (level == 1)
 	{
-
-
-
 		if (boxes_lvl == 2 * 3) {
 			win = 1;
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 			{
 				//App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-				lvlChange(1, '+');
+				lvlChange(3);
 				boxes_lvl = 0;
 				win = 0;
 				steps = 0;
@@ -85,7 +75,7 @@ void LevelManager::LevelComplete()
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) 
 			{
 				//app->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-				lvlChange(1, '+');
+				lvlChange(3);
 				boxes_lvl = 0;
 				win = 0;
 				steps = 0;
@@ -98,7 +88,7 @@ void LevelManager::LevelComplete()
 			win = 1;
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 				//App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneLevel_1, 90);
-				lvlChange(1, '+');
+				lvlChange(3);
 				boxes_lvl = 0;
 				win = 0;
 				steps = 0;

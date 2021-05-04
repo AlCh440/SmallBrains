@@ -12,7 +12,6 @@ private:
 public:
 
 	int boxes_lvl = 0;
-	bool boxes_done[3] = { false, false, false };
 
 	LevelManager();
 
@@ -20,7 +19,7 @@ public:
 
 	bool Update(float dt);
 
-	void lvlChange(int change, char op);
+	void lvlChange(int change);
 
 	void Lose();
 
