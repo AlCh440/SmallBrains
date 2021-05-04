@@ -25,7 +25,7 @@ public:
 	bool Start();
 
 	// Called each loop iteration
-	bool PreUpdate();
+	bool LevelStart(int level);
 
 	// Called each loop iteration
 	bool Update(float dt);
@@ -43,13 +43,13 @@ public:
 	*/
 
 	// Position of the player in the map
-	int position_x;
-	int position_y;
+	float position_x;
+	float position_y;
 	bool move;
 	int direction;
 	int moveAction;
-	// The speed in which we move the player (pixels per frame)       NEED TO CALCULATE
-	int step = 16;
+	int step = 1200;
+	int framesPerSprite = 14;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* spriteSheet = nullptr;

@@ -12,8 +12,9 @@ class Input;
 class Render;
 class Textures;
 class Audio;
-class Scene;
 class Player;
+class LevelManager;
+class Tiles;
 
 class App
 {
@@ -74,8 +75,9 @@ public:
 	Render* render;
 	Textures* tex;
 	Audio* audio;
-	Scene* scene;
 	Player* player;
+	LevelManager* levelManager;
+	Tiles* tiles;
 	
 
 private:

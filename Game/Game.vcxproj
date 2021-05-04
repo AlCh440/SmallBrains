@@ -95,16 +95,21 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\Input.cpp" />
-    <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\Box.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Tiles.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Box.h" />
+    <ClInclude Include="Source\Tiles.h" />
+    <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\Queue.h" />
     <ClInclude Include="Source\Scene.h" />

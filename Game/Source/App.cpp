@@ -6,6 +6,9 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Player.h"
+#include "Animation.h"
+#include "LevelManager.h"
+#include "Tiles.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -23,17 +26,20 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	render = new Render();
 	tex = new Textures();
 	audio = new Audio();
-	scene = new Scene();
 	player = new Player();
+	levelManager = new LevelManager();
+	tiles = new Tiles();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(win);
-	AddModule(player);
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(scene);
+	AddModule(levelManager);
+	AddModule(tiles);
+	AddModule(player);
+
 	
 
 	// Render last to swap buffer
