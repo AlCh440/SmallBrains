@@ -11,8 +11,6 @@
 #include "Collisions.h"
 
 #include "Log.h"
-#include "iostream"
-
 
 
 
@@ -111,7 +109,7 @@ bool Player::Start()
 
 
 	positionX = 6.0f;
-	positionX = 2.0f;
+	positionY = 2.0f;
 	playerSteps = 0;
 	direction = 1;
 	stepCount = 0;
@@ -153,7 +151,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (positionX - 24 >= 0))
+			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (positionY - 24 >= 0))
 			{
 				direction = 1; // Up
 				move = false;
@@ -162,7 +160,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (positionX + 48 <= 264))
+			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (positionY + 48 <= 264))
 			{
 				direction = 2; // Down
 				move = false;
@@ -176,11 +174,11 @@ bool Player::Update(float dt)
 			moveAction += 1;
 			if (direction == 1)
 			{
-				positionX -= 0.05f;
+				positionY -= 0.05f;
 			}
 			else if (direction == 2)
 			{
-				positionX += 0.05f;
+				positionY += 0.05f;
 			}
 			else if (direction == 3)
 			{
@@ -198,7 +196,7 @@ bool Player::Update(float dt)
 			moveAction = 0;
 		}
 
-		app->collisions->AddCollider({ (int)positionX, (int)positionX, 24, 24 }, Collider::Type::PLAYER, this);
+		app->collisions->AddCollider({ (int)positionX, (int)positionY, 24, 24 }, Collider::Type::PLAYER, this);
 
 		//app->collisions->AddCollider({ (int)position_x + 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
 		//app->collisions->AddCollider({ (int)position_x - 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
@@ -209,7 +207,7 @@ bool Player::Update(float dt)
 
 		currentAnimation->Update();
 
-		app->render->DrawTexture(spriteSheet, positionX, positionX, &currentAnimation->GetCurrentFrame());
+		app->render->DrawTexture(spriteSheet, positionX, positionY, &currentAnimation->GetCurrentFrame());
 
 
 

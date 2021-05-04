@@ -5,8 +5,6 @@
 #include "Collisions.h"
 
 #include "Log.h"
-#include "iostream"
-
 
 Box::Box()
 {
@@ -56,7 +54,6 @@ int Box::GetPos_Y()
 
 void Box::SetPos_X(int pos)
 {
-	std::cout << "CCC";
 	pos_x = pos;
 }
 

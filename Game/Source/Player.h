@@ -43,8 +43,8 @@ public:
 	
 
 	// Position of the player in the map
-	float position_x;
-	float position_y;
+	float positionX;
+	float positionY;
 	bool move;
 	int direction;
 	int moveAction;

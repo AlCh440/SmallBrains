@@ -6,8 +6,6 @@
 #include "SDL/include/SDL.h"
 
 
-#include "iostream"
-
 BoxManager::BoxManager()
 {
 	box_01 = new Box();
