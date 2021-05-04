@@ -4,12 +4,17 @@
 #include "Input.h"
 #include "Module.h"
 #include "Tiles.h"
+#include "BoxManager.h"
+#include "Audio.h"
 
 #include <SDL\include\SDL.h>
+#include "iostream"
 
 LevelManager::LevelManager()
 {
-	level = 1;
+	level = 0;
+	framesCounter = 0;
+
 }
 
 
@@ -18,10 +23,20 @@ LevelManager::~LevelManager()
 
 }
 
+bool LevelManager::Start()
+{
+	introMusic = app->audio->LoadFx("Assets/Audio/Fx/02_title_screen.wav");
+
+	return true;
+}
+
 bool LevelManager::Update(float dt)
 {
-	
+	app->audio->LoadFx(&introMusic);
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) app->boxManager->InitializeLvl1();
 	app->tiles->DrawArray(*backgroundLvl1, 11, 11);
+
+	framesCounter++;
 	return true;
 }
 
@@ -31,6 +46,7 @@ void LevelManager::lvlChange(int change)
 	if (level == 1) 
 	{
 		//Sett boxes !!!
+		app->boxManager->InitializeLvl1();
 		//Sett player position !!!
 	}
 }
@@ -46,7 +62,7 @@ void LevelManager::Lose()
 
 		boxes_lvl = 0;
 		win = 0;
-		steps = 0;
+		
 	}
 
 }
@@ -63,7 +79,7 @@ void LevelManager::LevelComplete()
 				lvlChange(3);
 				boxes_lvl = 0;
 				win = 0;
-				steps = 0;
+				
 			}
 
 		}
@@ -78,7 +94,7 @@ void LevelManager::LevelComplete()
 				lvlChange(3);
 				boxes_lvl = 0;
 				win = 0;
-				steps = 0;
+				
 			}
 		}
 	}
@@ -91,7 +107,7 @@ void LevelManager::LevelComplete()
 				lvlChange(3);
 				boxes_lvl = 0;
 				win = 0;
-				steps = 0;
+				
 			}
 		}
 		

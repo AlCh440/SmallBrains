@@ -42,7 +42,7 @@ bool Window::Awake(pugi::xml_node& config)
 
 		width = 1280;
 		height = 960;
-		scale = 1;
+		scale = 2;
 
 		if(fullscreen == true) flags |= SDL_WINDOW_FULLSCREEN;
 		if(borderless == true) flags |= SDL_WINDOW_BORDERLESS;

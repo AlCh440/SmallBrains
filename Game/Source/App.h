@@ -16,6 +16,7 @@ class Player;
 class LevelManager;
 class Tiles;
 class Collisions;
+class BoxManager;
 
 class App
 {
@@ -80,6 +81,7 @@ public:
 	LevelManager* levelManager;
 	Tiles* tiles;
 	Collisions* collisions;
+	BoxManager* boxManager;
 
 private:
 

@@ -24,55 +24,57 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 
 	StillRightAnim.loop = false;
 	// move up
-	upAnim.PushBack({ 5, 315, 64, 102 });
-	upAnim.PushBack({ 75, 315, 64, 102 });
-	upAnim.PushBack({ 145, 315, 64, 102 });
-	upAnim.PushBack({ 145, 315, 64, 102 });
-	upAnim.PushBack({ 215, 315, 64, 102 });
-	upAnim.PushBack({ 285, 315, 64, 102 });
-	upAnim.PushBack({ 355, 315, 64, 102 });
-	upAnim.PushBack({ 425, 315, 64, 102 });
+	upAnim.PushBack({ 1, 68, 14, 22 });
+	upAnim.PushBack({ 16, 68, 14, 22 });
+	upAnim.PushBack({ 31, 68, 14, 22 });
+	upAnim.PushBack({ 46, 68, 14, 22 });
+	upAnim.PushBack({ 61, 68, 14, 22 });
+	upAnim.PushBack({ 76, 68, 14, 22 });
+	upAnim.PushBack({ 91, 68, 14, 22 });
+	upAnim.PushBack({ 106, 68, 14, 22 });
+	upAnim.PushBack({ 1, 68, 14, 22 });
 
 	upAnim.loop = false;
 	upAnim.speed = 0.008f;
 
 	// move down
-	downAnim.PushBack({ 5, 5, 64, 95 });
-	downAnim.PushBack({ 75, 5, 64, 95 });
-	downAnim.PushBack({ 145, 5, 64, 95 });
-	downAnim.PushBack({ 145, 5, 64, 95 });
-	downAnim.PushBack({ 215, 5, 64, 95 });
-	downAnim.PushBack({ 285, 5, 64, 95 });
-	downAnim.PushBack({ 355, 5, 64, 95 });
-	downAnim.PushBack({ 425, 5, 64, 95 });
+	downAnim.PushBack({ 1, 1, 14, 20 });
+	downAnim.PushBack({ 16, 1, 14, 20 });
+	downAnim.PushBack({ 31, 1, 14, 20 });
+	downAnim.PushBack({ 46, 1, 14, 20 });
+	downAnim.PushBack({ 61, 1, 14, 20 });
+	downAnim.PushBack({ 76, 1, 14, 20 });
+	downAnim.PushBack({ 91, 1, 14, 20 });
+	downAnim.PushBack({ 106, 1, 14, 20 });
+	downAnim.PushBack({ 1, 1, 14, 20 });
 
 	downAnim.loop = false;
 	downAnim.speed = 0.008f;
 
 	// move left
-	leftAnim.PushBack({ 5, 104, 64, 102 });
-	leftAnim.PushBack({ 75, 104, 64, 102 });
-	leftAnim.PushBack({ 145, 104, 64, 102 });
-	leftAnim.PushBack({ 145, 104, 64, 102 });
-	leftAnim.PushBack({ 215, 104, 64, 102 });
-	leftAnim.PushBack({ 285, 104, 64, 102 });
-	leftAnim.PushBack({ 355, 104, 64, 102 });
-	leftAnim.PushBack({ 425, 104, 64, 102 });
+	leftAnim.PushBack({ 1, 22, 14, 22 });
+	leftAnim.PushBack({ 16, 22, 14, 22 });
+	leftAnim.PushBack({ 31, 22, 14, 22 });
+	leftAnim.PushBack({ 46, 22, 14, 22 });
+	leftAnim.PushBack({ 61, 22, 14, 22 });
+	leftAnim.PushBack({ 76, 22, 14, 22 });
+	leftAnim.PushBack({ 91, 22, 14, 22 });
+	leftAnim.PushBack({ 106, 22, 14, 22 });
+	leftAnim.PushBack({ 1, 22, 14, 22 });
 
 	leftAnim.loop = false;
 	leftAnim.speed = 0.008f;
 
 	// move right
-	rightAnim.PushBack({ 5, 212, 64, 102 });
-	rightAnim.PushBack({ 75, 212, 64, 102 });
-	rightAnim.PushBack({ 145, 212, 64, 102 });
-	rightAnim.PushBack({ 145, 212, 64, 102 });
-	rightAnim.PushBack({ 215, 212, 64, 102 });
-	rightAnim.PushBack({ 285, 212, 64, 102 });
-	rightAnim.PushBack({ 355, 212, 64, 102 });
-	rightAnim.PushBack({ 425, 212, 64, 102 });
-	rightAnim.PushBack({ 5, 212, 64, 102 });
-
+	rightAnim.PushBack({ 1, 45, 14, 22 });
+	rightAnim.PushBack({ 16, 45, 14, 22 });
+	rightAnim.PushBack({ 31, 45, 14, 22 });
+	rightAnim.PushBack({ 46, 45, 14, 22 });
+	rightAnim.PushBack({ 61, 45, 14, 22 });
+	rightAnim.PushBack({ 76, 45, 14, 22 });
+	rightAnim.PushBack({ 91, 45, 14, 22 });
+	rightAnim.PushBack({ 106, 45, 14, 22 });
+	rightAnim.PushBack({ 1, 45, 14, 22 });
 
 	rightAnim.loop = false;
 	rightAnim.speed = 0.008f;
@@ -105,13 +107,14 @@ bool Player::Start()
 
 	bool ret = true;
 	
-	spriteSheet = app->tex->Load("Assets/Textures/updatedSpritesheet.png");
+	spriteSheet = app->tex->Load("Assets/Textures/spriteSheet.png");
 
 
-	position_x = 0.0f;
-	position_y = 0.0f;
+	position_x = 6.0f;
+	position_y = 2.0f;
 	playerSteps = 0;
 	direction = 1;
+	stepCount = 0;
 	//collider = app->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
 	return ret;
@@ -130,36 +133,40 @@ bool Player::Update(float dt)
 {
 	if (move)
 	{
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (position_x - 24 >= 0))
 		{
 			direction = 3; // Left
 			move = false;
 			leftAnim.Reset();
 			currentAnimation = &leftAnim;
+			stepCount++;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (position_x + 24 <= 264))
 		{
 			direction = 4; // Right
 			move = false;
 			rightAnim.Reset();
 			currentAnimation = &rightAnim;
+			stepCount++;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+		if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (position_y - 24 >= 0))
 		{
 			direction = 1; // Up
 			move = false;
 			upAnim.Reset();
 			currentAnimation = &upAnim;
+			stepCount++;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (position_y + 48 <= 264))
 		{
 			direction = 2; // Down
 			move = false;
 			downAnim.Reset();
 			currentAnimation = &downAnim;
+			stepCount++;
 		}
 	}
 	else if ((moveAction < step) && (!move))
@@ -167,19 +174,19 @@ bool Player::Update(float dt)
 		moveAction += 1;
 		if (direction == 1)
 		{
-			position_y -= 0.2f;
+			position_y -= 0.1f;
 		}
 		else if (direction == 2)
 		{
-			position_y += 0.2f;
+			position_y += 0.1f;
 		}
 		else if (direction == 3)
 		{
-			position_x -= 0.2f;
+			position_x -= 0.1f;
 		}
 		else if (direction == 4)
 		{
-			position_x += 0.2f;
+			position_x += 0.1f;
 			
 		}
 	}

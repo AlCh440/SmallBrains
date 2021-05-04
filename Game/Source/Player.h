@@ -48,8 +48,9 @@ public:
 	bool move;
 	int direction;
 	int moveAction;
-	int step = 1200;
+	int step = 240;
 	int framesPerSprite = 14;
+	int stepCount;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* spriteSheet = nullptr;

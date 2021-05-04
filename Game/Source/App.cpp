@@ -8,7 +8,9 @@
 #include "Player.h"
 #include "Animation.h"
 #include "LevelManager.h"
+#include "BoxManager.h"
 #include "Tiles.h"
+#include "Box.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -30,6 +32,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	levelManager = new LevelManager();
 	tiles = new Tiles();
 	collisions = new Collisions();
+	boxManager = new BoxManager();
+
+
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -40,6 +45,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(levelManager);
 	AddModule(tiles);
 	AddModule(player);
+	AddModule(boxManager);
 	AddModule(collisions);
 	
 

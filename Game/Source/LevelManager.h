@@ -2,12 +2,16 @@
 #define __LEVELMANAGER_H__ 
 
 #include "Module.h"
+#include "Audio.h"
+#include "SDL_mixer/include/SDL_mixer.h"
+#include "SDL/include/SDL.h"
 
 class LevelManager : public Module
 {
 private:
 
 	int level;
+	int framesCounter;
 
 public:
 
@@ -16,6 +20,8 @@ public:
 	LevelManager();
 
 	~LevelManager();
+
+	bool Start() override;
 
 	bool Update(float dt) override;
 
@@ -27,11 +33,10 @@ public:
 
 	int Getlvl();
 
-	int steps = 0;
-
 	int win = 0;
-
 	int max_steps = 0;
+
+	char introMusic;
 
 	int backgroundLvl1[11][11] =
 	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},

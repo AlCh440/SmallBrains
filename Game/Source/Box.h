@@ -17,7 +17,7 @@ public:
 	bool Start() override;
 
 	// Called each loop iteration
-	bool Update(float dt) override; 
+	bool Update(float dt) override;
 
 	// Called before quitting
 	virtual bool CleanUp() override;
@@ -32,6 +32,9 @@ public:
 	int pos_y;
 
 	SDL_Texture* spriteSheet;
+	SDL_Rect box;
+
+	void OnCollision(Collider* c1, Collider* c2);
 };
 
 #endif 

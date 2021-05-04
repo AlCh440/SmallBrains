@@ -2,24 +2,29 @@
 #include "Box.h"
 #include "Textures.h"
 #include "Render.h"
+#include "Collisions.h"
 
 #include "Log.h"
+#include "iostream"
 
 
-Box::Box() : Module()
+Box::Box()
 {
 	pos_x = 0;
 	pos_y = 0;
+	box = { 27, 144, 24, 24 };
+	
 }
 
 // Destructor
 Box::~Box()
 {
+
 }
 
 bool Box::Start()
 { 
-	spriteSheet = app->tex->Load("Assets/Textures/TileSheet.png");
+	spriteSheet = app->tex->Load("Assets/Textures/tileSheet.png");
 
 	return true;
 }
@@ -27,9 +32,9 @@ bool Box::Start()
 // Set new window title
 bool Box::Update(float dt)
 {
-	app->render->DrawTexture(spriteSheet, pos_x, pos_y);
-
+	app->render->DrawTexture(spriteSheet, this->pos_x, this->pos_y, &box );
 	return true;
+
 }
 
 // Called before quitting
@@ -51,10 +56,16 @@ int Box::GetPos_Y()
 
 void Box::SetPos_X(int pos)
 {
+	std::cout << "CCC";
 	pos_x = pos;
 }
 
 void Box::SetPos_Y(int pos)
 {
 	pos_y = pos;
+}
+
+void Box::OnCollision(Collider* c1, Collider* c2)
+{
+
 }
