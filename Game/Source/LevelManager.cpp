@@ -35,7 +35,7 @@ bool LevelManager::Update(float dt)
 		introMenu = app->tex->Load("Assets/Textures/super_soukoban_intro.png");
 		smallbrainsIntro = app->tex->Load("Assets/Textures/small_brains_intro.png");
 
-		app->audio->PlayMusic("Assets/Audio/Music/02_title_screen.ogg", 1.0f);
+		app->audio->PlayMusic("Assets/Audio/Music/01_Opening_A. Suda.ogg", 1.0f);
 	}
 	introMusic = false;
 
