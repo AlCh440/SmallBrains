@@ -15,6 +15,7 @@ class Audio;
 class Player;
 class LevelManager;
 class Tiles;
+class Collisions;
 
 class App
 {
@@ -78,7 +79,7 @@ public:
 	Player* player;
 	LevelManager* levelManager;
 	Tiles* tiles;
-	
+	Collisions* collisions;
 
 private:
 

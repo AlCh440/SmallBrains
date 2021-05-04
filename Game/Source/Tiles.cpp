@@ -8,10 +8,10 @@
 
 Tiles::Tiles()
 {
-    floor_01 = { 89, 335, 116, 116 };
-    floor_02 = { 89, 799, 116, 116 };
-    wall_01 = { 89, 103, 116, 116 };
-    wall_02 = { 320, 103, 116, 116 };
+    floor_01 = { 27, 88, 24, 24 };
+    floor_02 = { 27, 200, 24, 24 };
+    wall_01 = { 27, 32, 24, 24 };
+    wall_02 = { 77, 32, 24, 24 };
 }
 
 Tiles::~Tiles()
@@ -26,8 +26,6 @@ bool Tiles::Start()
 }
 
 
-
-
 bool Tiles::CleanUp()
 {
     return true;
@@ -39,10 +37,15 @@ void Tiles::DrawArray(int* arr, int row, int col)
     {
         for (int j = 0; j < col; j++)
         {
-            if (*(arr + row * i + j) == 1) app->render->DrawTexture(spriteSheet, j * 116, i * 116, &floor_01);
-            else if  (*(arr + row * i + j) == 2) app->render->DrawTexture(spriteSheet, j * 116, i * 116, &floor_02);
-            else if (*(arr + row * i + j) == 3) app->render->DrawTexture(spriteSheet, j * 116, i * 116, &wall_01);
-            else if (*(arr + row * i + j) == 4) app->render->DrawTexture(spriteSheet, j * 116, i * 116, &wall_02);
+            if (*(arr + row * i + j) == 1) app->render->DrawTexture(spriteSheet, j * 24, i * 24, &floor_01);
+            else if  (*(arr + row * i + j) == 2) app->render->DrawTexture(spriteSheet, j * 24, i * 24, &floor_02);
+            else if (*(arr + row * i + j) == 3) app->render->DrawTexture(spriteSheet, j * 24, i * 24, &wall_01);
+            else if (*(arr + row * i + j) == 4) app->render->DrawTexture(spriteSheet, j * 24, i * 24, &wall_02);
         }
     }
+}
+
+void Tiles::OnCollision(Collider* c1, Collider* c2)
+{
+
 }

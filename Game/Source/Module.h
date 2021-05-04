@@ -2,7 +2,7 @@
 #define __MODULE_H__
 
 #include "SString.h"
-
+#include "Collider.h"
 #include "PugiXml/src/pugixml.hpp"
 
 class App;
@@ -55,6 +55,12 @@ public:
 	{
 		return true;
 	}
+
+	virtual void OnCollision(Collider* c1, Collider* c2)
+	{
+
+	}
+
 
 public:
 

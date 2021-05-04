@@ -1,8 +1,8 @@
-#ifndef __PLAYER_H__
-#define __PLAYER_H__
-
+#ifndef __BOX_H__
+#define __BOX_H__
 #include "Module.h"
 #include "Textures.h"
+
 
 class Box : public Module 
 {
@@ -14,13 +14,13 @@ public:
 
 
 	// Called before the first frame
-	bool Start();
+	bool Start() override;
 
 	// Called each loop iteration
-	bool Update(float dt); 
+	bool Update(float dt) override; 
 
 	// Called before quitting
-	virtual bool CleanUp();
+	virtual bool CleanUp() override;
 
 	int GetPos_X();
 	int GetPos_Y();
@@ -34,4 +34,4 @@ public:
 	SDL_Texture* spriteSheet;
 };
 
-#endif // __MODULE_H__
+#endif 

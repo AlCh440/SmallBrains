@@ -5,6 +5,8 @@
 #include "Module.h"
 #include "Textures.h"
 #include "Render.h"
+#include "Collider.h"
+#include "Collisions.h"
 
 struct SDL_Texture;
 struct SDL_Rect;
@@ -22,12 +24,14 @@ public:
 
 
 	// Called before the first frame
-	bool Start();
+	bool Start() override;
 
 	void DrawArray(int* arr, int row, int col);
 
 	// Called before quitting
-	virtual bool CleanUp();
+	virtual bool CleanUp() override;
+
+	void OnCollision(Collider* c1, Collider* c2) override;
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect floor_01;

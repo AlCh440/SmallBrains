@@ -17,7 +17,7 @@ public:
 
 	~LevelManager();
 
-	bool Update(float dt);
+	bool Update(float dt) override;
 
 	void lvlChange(int change);
 

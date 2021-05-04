@@ -18,11 +18,12 @@
     <ClCompile Include="Source\LevelManager.cpp" />
     <ClCompile Include="Source\Box.cpp" />
     <ClCompile Include="Source\Tiles.cpp" />
+    <ClCompile Include="Source\Collider.cpp" />
+    <ClCompile Include="Source\Collisions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Textures.h" />
-    <ClInclude Include="Source\Scene.h" />
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Input.h" />
@@ -62,6 +63,8 @@
     <ClInclude Include="Source\LevelManager.h" />
     <ClInclude Include="Source\Box.h" />
     <ClInclude Include="Source\Tiles.h" />
+    <ClInclude Include="Source\Collisions.h" />
+    <ClInclude Include="Source\Collider.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

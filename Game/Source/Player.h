@@ -19,28 +19,28 @@ public:
 	virtual ~Player();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&);
+	bool Awake(pugi::xml_node&) override;
 
 	// Called before the first frame
-	bool Start();
+	bool Start() override;
 
 	// Called each loop iteration
 	bool LevelStart(int level);
 
 	// Called each loop iteration
-	bool Update(float dt);
+	bool Update(float dt) override;
 
 	// Called each loop iteration
-	bool PostUpdate();
+	bool PostUpdate() override;
 
 
 	// Called before quitting
-	virtual bool CleanUp();
-	/*
+	virtual bool CleanUp() override;
+	
 
-	// Collision callback, called when the player intersects with another collider
+	//Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
-	*/
+	
 
 	// Position of the player in the map
 	float position_x;

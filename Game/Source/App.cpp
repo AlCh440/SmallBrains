@@ -4,7 +4,7 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-#include "Scene.h"
+#include "Collisions.h"
 #include "Player.h"
 #include "Animation.h"
 #include "LevelManager.h"
@@ -29,6 +29,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player();
 	levelManager = new LevelManager();
 	tiles = new Tiles();
+	collisions = new Collisions();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -39,7 +40,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(levelManager);
 	AddModule(tiles);
 	AddModule(player);
-
+	AddModule(collisions);
 	
 
 	// Render last to swap buffer

@@ -5,9 +5,10 @@
 #include "Audio.h"
 #include "Render.h"
 #include "Window.h"
-#include "Scene.h"
+#include "Collider.h"
 #include "Box.h"
 #include "LevelManager.h"
+#include "Collisions.h"
 
 #include "Log.h"
 #include "iostream"
@@ -187,11 +188,15 @@ bool Player::Update(float dt)
 		move = true;
 		moveAction = 0;
 	}
-	// If no up/down movement detected, set the current animation back to idle
 
-	
+	app->collisions->AddCollider({ (int)position_x, (int)position_y, 24, 24 }, Collider::Type::PLAYER, this);
 
-	//collider->SetPos(position.x, position.y);																	COLLIDEEEEEEEER
+	//app->collisions->AddCollider({ (int)position_x + 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
+	//app->collisions->AddCollider({ (int)position_x - 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
+	//app->collisions->AddCollider({ (int)position_x, (int)position_y - 24, 24, 24 }, Collider::Type::NEAR, this);
+	//app->collisions->AddCollider({ (int)position_x, (int)position_y + 24, 24, 24 }, Collider::Type::NEAR, this);
+
+	//collider->SetPos(position.x, position.y);	
 
 	currentAnimation->Update();
 	
@@ -213,18 +218,9 @@ bool Player::CleanUp()
 	return true;
 }
 
-/*void Player::OnCollision(Collider* c1, Collider* c2)
+
+void Player::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider && destroyed == false)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
-		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
-		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
-
-		App->audio->PlayFx(explosionFx);
-
-		destroyed = true;
 	}
-}																			COLLIDEEEEEEEEEERS!!!!!!!!!!!*/
+}																		

@@ -16,10 +16,10 @@ public:
 	virtual ~Window();
 
 	// Called before render is available
-	bool Awake(pugi::xml_node&);
+	bool Awake(pugi::xml_node&) override;
 
 	// Called before quitting
-	bool CleanUp();
+	bool CleanUp() override;
 
 	// Changae title
 	void SetTitle(const char* title);
@@ -33,6 +33,7 @@ public:
 public:
 	// The window we'll be rendering to
 	SDL_Window* window;
+
 
 	// The surface contained by the window
 	SDL_Surface* screenSurface;
