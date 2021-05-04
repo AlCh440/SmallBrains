@@ -110,8 +110,8 @@ bool Player::Start()
 	spriteSheet = app->tex->Load("Assets/Textures/spriteSheet.png");
 
 
-	position_x = 6.0f;
-	position_y = 2.0f;
+	positionX = 6.0f;
+	positionX = 2.0f;
 	playerSteps = 0;
 	direction = 1;
 	stepCount = 0;
@@ -135,7 +135,7 @@ bool Player::Update(float dt)
 	{
 		if (move)
 		{
-			if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (position_x - 24 >= 0))
+			if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (positionX - 24 >= 0))
 			{
 				direction = 3; // Left
 				move = false;
@@ -144,7 +144,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (position_x + 24 <= 264))
+			if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (positionX + 24 <= 264))
 			{
 				direction = 4; // Right
 				move = false;
@@ -153,7 +153,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (position_y - 24 >= 0))
+			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (positionX - 24 >= 0))
 			{
 				direction = 1; // Up
 				move = false;
@@ -162,7 +162,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (position_y + 48 <= 264))
+			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (positionX + 48 <= 264))
 			{
 				direction = 2; // Down
 				move = false;
@@ -176,19 +176,19 @@ bool Player::Update(float dt)
 			moveAction += 1;
 			if (direction == 1)
 			{
-				position_y -= 0.1f;
+				positionX -= 0.05f;
 			}
 			else if (direction == 2)
 			{
-				position_y += 0.1f;
+				positionX += 0.05f;
 			}
 			else if (direction == 3)
 			{
-				position_x -= 0.1f;
+				positionX -= 0.05f;
 			}
 			else if (direction == 4)
 			{
-				position_x += 0.1f;
+				positionX += 0.05f;
 
 			}
 		}
@@ -198,7 +198,7 @@ bool Player::Update(float dt)
 			moveAction = 0;
 		}
 
-		app->collisions->AddCollider({ (int)position_x, (int)position_y, 24, 24 }, Collider::Type::PLAYER, this);
+		app->collisions->AddCollider({ (int)positionX, (int)positionX, 24, 24 }, Collider::Type::PLAYER, this);
 
 		//app->collisions->AddCollider({ (int)position_x + 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
 		//app->collisions->AddCollider({ (int)position_x - 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
@@ -209,7 +209,7 @@ bool Player::Update(float dt)
 
 		currentAnimation->Update();
 
-		app->render->DrawTexture(spriteSheet, position_x, position_y, &currentAnimation->GetCurrentFrame());
+		app->render->DrawTexture(spriteSheet, positionX, positionX, &currentAnimation->GetCurrentFrame());
 
 
 

@@ -49,16 +49,21 @@ bool LevelManager::Update(float dt)
 	{
 		app->render->DrawTexture(introMenu, 16, 0);
 		framesCounter++;
+		if (framesCounter > 15000) lvlChange(1);
+
 	}
 	else if (level == 1)
 	{
 		app->tiles->DrawArray(*backgroundLvl1, 11, 11);
-
+		if (app->player->stepCount == 20)
+		{
+			lvlChange(-1);
+			app->player->stepCount = 0;
+		}
 	}
 
 
 
-	if (framesCounter > 15000) lvlChange(1);
 	return true;
 }
 

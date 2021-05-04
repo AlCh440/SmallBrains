@@ -48,7 +48,7 @@ public:
 	bool move;
 	int direction;
 	int moveAction;
-	int step = 240;
+	int step = 480;
 	int framesPerSprite = 14;
 	int stepCount;
 
