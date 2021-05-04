@@ -2,11 +2,11 @@
 
 ## Description
 
-{project description}
+this game is a replica of the game for snes super soukoban, created by the [SmallBrains](https://github.com/AlCh440/SmallBrains) team.
  
 ## How to play
 
- - {ControlsScheme}
+ The game consists of moving some boxes up to some red dots, with a limited number of steps, without leaving any visible point. In each level there will be more boxes and more red dots to cover. To move the character you will use the WASD keys, and to move the boxes we will only have to place ourselves in front of them. Enjoy!!!
 
 ## Developers
 
