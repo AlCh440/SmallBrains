@@ -1,7 +1,7 @@
 #ifndef __COLLISIONS_H__
 #define __COLLISIONS_H__
 
-#define MAX_COLLIDERS 50
+#define MAX_COLLIDERS 100
 
 #include "Module.h"
 #include "Collider.h"
@@ -11,7 +11,7 @@ class Collisions : public Module
 public:
 	// Constructor
 	// Fills all collision matrix data
-	Collisions();
+	Collisions(bool startEnabled);
 
 	// Destructor
 	~Collisions();
@@ -41,10 +41,9 @@ public:
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
 
-private:
 	// All existing colliders in the scene
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };
-
+	
 	// The collision matrix. Defines the interaction for two collider types
 	// If set two false, collider 1 will ignore collider 2
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];

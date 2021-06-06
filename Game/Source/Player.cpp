@@ -11,16 +11,19 @@
 #include "Collisions.h"
 
 #include "Log.h"
+#include "iostream"
 
 
 
-Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!!!!!!!!!
+Player::Player(bool startEnabled) : Module(startEnabled) //	
 {
 	// Still
+	playerhitbox = { (int)positionX, (int)positionY, 24, 24 };
 
 	StillAnim.PushBack({ 1, 45, 14, 22});
 
 	StillAnim.loop = false;
+
 	// move up
 	upAnim.PushBack({ 1, 68, 14, 22 });
 	upAnim.PushBack({ 16, 68, 14, 22 });
@@ -33,7 +36,7 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 	upAnim.PushBack({ 1, 68, 14, 22 });
 
 	upAnim.loop = false;
-	upAnim.speed = 0.008f;
+	upAnim.speed = 0.2f;
 
 	// move down
 	downAnim.PushBack({ 1, 1, 14, 20 });
@@ -47,7 +50,7 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 	downAnim.PushBack({ 1, 1, 14, 20 });
 
 	downAnim.loop = false;
-	downAnim.speed = 0.008f;
+	downAnim.speed = 0.2f;
 
 	// move left
 	leftAnim.PushBack({ 1, 22, 14, 22 });
@@ -61,7 +64,7 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 	leftAnim.PushBack({ 1, 22, 14, 22 });
 
 	leftAnim.loop = false;
-	leftAnim.speed = 0.008f;
+	leftAnim.speed = 0.2f;
 
 	// move right
 	rightAnim.PushBack({ 1, 45, 14, 22 });
@@ -75,14 +78,12 @@ Player::Player() //													Modifty the pushbacks and speed!!!!!!!!!!!!!!!!!
 	rightAnim.PushBack({ 1, 45, 14, 22 });
 
 	rightAnim.loop = false;
-	rightAnim.speed = 0.008f;
+	rightAnim.speed = 0.2f;
 
-	// Move down
-	
-	
-
-	// move left
-	
+	for (int i = 0; i < 4; i++)
+	{
+		playerCanMove[i] = true;
+	}
 	
 	currentAnimation = &StillAnim;
 	move = true;
@@ -108,12 +109,24 @@ bool Player::Start()
 	spriteSheet = app->tex->Load("Assets/Textures/spriteSheet.png");
 
 
-	positionX = 6.0f;
-	positionY = 2.0f;
+	positionX = 0.0f;
+	positionY = 0.0f;
 	playerSteps = 0;
 	direction = 1;
 	stepCount = 0;
-	//collider = app->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+
+	collPlayer = app->collisions->AddCollider({ (int)positionX, (int)positionY, 24, 24 }, Collider::Type::PLAYER, this);
+
+	collPlayerRight = app->collisions->AddCollider({ (int)positionX + 24, (int)positionY, 24, 24 }, Collider::Type::NEAR, this);
+	collPlayerLeft = app->collisions->AddCollider({ (int)positionX - 24, (int)positionY, 24, 24 }, Collider::Type::NEAR, this);
+	collPlayerUp = app->collisions->AddCollider({ (int)positionX, (int)positionY - 24, 24, 24 }, Collider::Type::NEAR, this);
+	collPlayerDown = app->collisions->AddCollider({ (int)positionX, (int)positionY + 24, 24, 24 }, Collider::Type::NEAR, this);
+
+	collPlayerFarRight = app->collisions->AddCollider({ (int)positionX + 48, (int)positionY, 24, 24 }, Collider::Type::FAR, this);
+	collPlayerFarLeft = app->collisions->AddCollider({ (int)positionX - 48, (int)positionY, 24, 24 }, Collider::Type::FAR, this);
+	collPlayerFarUp = app->collisions->AddCollider({ (int)positionX, (int)positionY - 48, 24, 24 }, Collider::Type::FAR, this);
+	collPlayerFarDown = app->collisions->AddCollider({ (int)positionX, (int)positionY + 48, 24, 24 }, Collider::Type::FAR, this);
+
 
 	return ret;
 }
@@ -128,12 +141,11 @@ bool Player::LevelStart(int level)
 }
 
 bool Player::Update(float dt)
-{
-	if (app->levelManager->Getlvl() == 1)
-	{
+{	
+
 		if (move)
 		{
-			if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (positionX - 24 >= 0))
+			if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (playerCanMove[2] == true))
 			{
 				direction = 3; // Left
 				move = false;
@@ -142,7 +154,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (positionX + 24 <= 264))
+			if ((app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN) && (playerCanMove[3] == true))
 			{
 				direction = 4; // Right
 				move = false;
@@ -151,7 +163,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (positionY - 24 >= 0))
+			if ((app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) && (playerCanMove[0] == true))
 			{
 				direction = 1; // Up
 				move = false;
@@ -160,7 +172,7 @@ bool Player::Update(float dt)
 				stepCount++;
 			}
 
-			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (positionY + 48 <= 264))
+			if ((app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN) && (playerCanMove[1] == true))
 			{
 				direction = 2; // Down
 				move = false;
@@ -174,19 +186,19 @@ bool Player::Update(float dt)
 			moveAction += 1;
 			if (direction == 1)
 			{
-				positionY -= 0.05f;
+				positionY -= 1.0f;
 			}
 			else if (direction == 2)
 			{
-				positionY += 0.05f;
+				positionY += 1.0f;
 			}
 			else if (direction == 3)
 			{
-				positionX -= 0.05f;
+				positionX -= 1.0f;
 			}
 			else if (direction == 4)
 			{
-				positionX += 0.05f;
+				positionX += 1.0f;
 
 			}
 		}
@@ -196,22 +208,27 @@ bool Player::Update(float dt)
 			moveAction = 0;
 		}
 
-		app->collisions->AddCollider({ (int)positionX, (int)positionY, 24, 24 }, Collider::Type::PLAYER, this);
-
-		//app->collisions->AddCollider({ (int)position_x + 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
-		//app->collisions->AddCollider({ (int)position_x - 24, (int)position_y, 24, 24 }, Collider::Type::NEAR, this);
-		//app->collisions->AddCollider({ (int)position_x, (int)position_y - 24, 24, 24 }, Collider::Type::NEAR, this);
-		//app->collisions->AddCollider({ (int)position_x, (int)position_y + 24, 24, 24 }, Collider::Type::NEAR, this);
-
-		//collider->SetPos(position.x, position.y);	
 
 		currentAnimation->Update();
 
-		app->render->DrawTexture(spriteSheet, positionX, positionY, &currentAnimation->GetCurrentFrame());
+		app->render->DrawTexture(spriteSheet, positionX + 6, positionY, &currentAnimation->GetCurrentFrame());
 
+		collPlayer->SetPos(positionX, positionY);
 
+		collPlayerLeft->SetPos(positionX - 24, positionY);
+		collPlayerRight->SetPos(positionX + 24, positionY);
+		collPlayerUp->SetPos(positionX, positionY - 24);
+		collPlayerDown->SetPos(positionX, positionY + 24);
 
-	}
+		collPlayerFarLeft->SetPos(positionX - 48, positionY);
+		collPlayerFarRight->SetPos(positionX + 48, positionY);
+		collPlayerFarUp->SetPos(positionX, positionY - 48);
+		collPlayerFarDown->SetPos(positionX, positionY + 48);
+
+		for (int i = 0; i < 4; i++)
+		{
+			playerCanMove[i] = true;
+		}
 	return true;
 }
 
@@ -225,9 +242,107 @@ bool Player::CleanUp()
 	return true;
 }
 
+bool Player::isPlayerMoving()
+{
+	return move;
+}
+
+int Player::playerDirection()
+{
+	return direction;
+}
+
 
 void Player::OnCollision(Collider* c1, Collider* c2)
 {
+	if (c2->type == Collider::Type::WALL)
 	{
+		if (c1 == collPlayerLeft)
+		{
+			playerCanMove[2] = false;
+		}
+		else if (c1 == collPlayerRight)
+		{
+			playerCanMove[3] = false;
+		}
+		else if (c1 == collPlayerUp)
+		{
+			playerCanMove[0] = false;
+		}
+		else if (c1 == collPlayerDown)
+		{
+			playerCanMove[1] = false;
+		}
+
 	}
+	
+	/*if ((c1->type == Collider::Type::FAR) && (c2->type == Collider::Type::BOXMIDDLE))
+	{
+		Collider* c3;
+		
+		if (c1 == collPlayerFarLeft)
+		{
+			for (uint k = 0; k < MAX_COLLIDERS; ++k)
+			{
+				if (app->collisions->colliders[k] == nullptr)
+					continue;
+
+				c3 = app->collisions->colliders[k];
+
+				if ((c3->Intersects({ (int)positionX - 24, (int)positionY, 24, 24 })) && (c3->type == Collider::Type::BOXMIDDLE))
+				{
+					playerCanMove[2] = false;
+				}
+			}
+			
+		}
+		else if (c1 == collPlayerFarRight)
+		{
+			for (uint k = 0; k < MAX_COLLIDERS; ++k)
+			{
+				// skip empty colliders
+				if (app->collisions->colliders[k] == nullptr)
+					continue;
+
+				c3 = app->collisions->colliders[k];
+
+				if (app->collisions->matrix[c3->type][collPlayerRight->type] && c3->Intersects({ (int)positionX + 24, (int)positionY, 24, 24 }))
+				{
+					playerCanMove[3] = false;
+				}
+			}
+		}
+		else if (c1 == collPlayerFarUp)
+		{
+			for (uint k = 0; k < MAX_COLLIDERS; ++k)
+			{
+				// skip empty colliders
+				if (app->collisions->colliders[k] == nullptr)
+					continue;
+
+				c3 = app->collisions->colliders[k];
+
+				if (app->collisions->matrix[c3->type][collPlayerUp->type] && c3->Intersects({ (int)positionX, (int)positionY - 24, 24, 24 }))
+				{
+					playerCanMove[0] = false;
+				}
+			}
+		}
+		else if (c1 == collPlayerFarDown)
+		{
+			for (uint k = 0; k < MAX_COLLIDERS; ++k)
+			{
+				// skip empty colliders
+				if (app->collisions->colliders[k] == nullptr)
+					continue;
+
+				c3 = app->collisions->colliders[k];
+
+				if (app->collisions->matrix[c3->type][collPlayerDown->type] && c3->Intersects({ (int)positionX, (int)positionY + 24, 24, 24 }))
+				{
+					playerCanMove[1] = false;
+				}
+			}
+		}
+	}*/
 }																		

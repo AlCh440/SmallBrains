@@ -10,7 +10,7 @@ class BoxManager : public Module
 {
 public:
 
-	BoxManager();
+	BoxManager(bool startEnabled);
 
 	virtual ~BoxManager();
 
@@ -18,16 +18,25 @@ public:
 
 	bool Update(float dt) override;
 
+	void playLvl(float dt);
+
 	// Called before quitting
 	bool CleanUp() override;
 
 	void OnCollision(Collider* c1, Collider* c2) override;
 
 	void InitializeLvl1();
+	void InitializeLvl2();
+	void InitializeLvl3();
+	void InitializeLvl4();
+	void InitializeLvl5();
+	void InitializeLvl6();
+
 
 	Box* box_01;
 	Box* box_02;
 	Box* box_03;
+	Box* box_04;
 
 };
 

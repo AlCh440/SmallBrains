@@ -8,7 +8,7 @@ class Box : public Module
 {
 public:
 
-	Box();
+	Box(bool startEnabled);
 
 	virtual ~Box();
 
@@ -22,17 +22,28 @@ public:
 	// Called before quitting
 	virtual bool CleanUp() override;
 
+	void MoveBox(int direction);
+
 	int GetPos_X();
 	int GetPos_Y();
 
 	void SetPos_X(int pos);
 	void SetPos_Y(int pos);
 
-	int pos_x;
-	int pos_y;
+	int posX;
+	int posY;
+	bool move;
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect box;
+
+	Collider* collBox = nullptr;
+
+	Collider* collBoxLeft = nullptr;
+	Collider* collBoxRight = nullptr;
+	Collider* collBoxUp = nullptr;
+	Collider* collBoxDown = nullptr;
+
 
 	void OnCollision(Collider* c1, Collider* c2);
 };

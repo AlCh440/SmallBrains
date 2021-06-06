@@ -13,7 +13,7 @@ class Player : public Module
 public:
 
 
-	Player();
+	Player(bool startEnabled);
 
 	// Destructor
 	virtual ~Player();
@@ -37,6 +37,9 @@ public:
 	// Called before quitting
 	virtual bool CleanUp() override;
 	
+	bool isPlayerMoving();
+
+	int playerDirection();
 
 	//Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
@@ -48,9 +51,11 @@ public:
 	bool move;
 	int direction;
 	int moveAction;
-	int step = 480;
+	int step = 24;
 	int framesPerSprite = 14;
 	int stepCount;
+	bool playerCanMove[4];
+	SDL_Rect playerhitbox;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* spriteSheet = nullptr;
@@ -69,6 +74,16 @@ public:
 
 	// The player's collider
 	//Collider* collider = nullptr;
+	Collider* collPlayer = nullptr;
+	Collider* collPlayerLeft = nullptr;
+	Collider* collPlayerRight = nullptr;
+	Collider* collPlayerDown = nullptr;
+	Collider* collPlayerUp = nullptr;
+
+	Collider* collPlayerFarLeft = nullptr;
+	Collider* collPlayerFarRight= nullptr;
+	Collider* collPlayerFarUp = nullptr;
+	Collider* collPlayerFarDown = nullptr;
 
 	// The counter of the player Steps
 	int playerSteps;

@@ -30,7 +30,7 @@ class Input : public Module
 
 public:
 
-	Input();
+	Input(bool startEnabled);
 
 	// Destructor
 	virtual ~Input();
@@ -66,6 +66,7 @@ public:
 	void GetMouseMotion(int& x, int& y);
 
 private:
+
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;
 	KeyState mouseButtons[NUM_MOUSE_BUTTONS];

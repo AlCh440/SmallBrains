@@ -5,8 +5,9 @@
 
 #include "Log.h"
 #include "SDL/include/SDL_Scancode.h"
+#include "iostream"
 
-Collisions::Collisions()
+Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 {
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
@@ -15,21 +16,50 @@ Collisions::Collisions()
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::WALL][Collider::Type::BOX] = true;
 	matrix[Collider::Type::WALL][Collider::Type::NEAR] = true;
+	matrix[Collider::Type::WALL][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::WALL][Collider::Type::FAR] = false;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::BOX] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::NEAR] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::FAR] = false;
+
 
 	matrix[Collider::Type::BOX][Collider::Type::WALL] = true;
 	matrix[Collider::Type::BOX][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::BOX][Collider::Type::BOX] = false;
+	matrix[Collider::Type::BOX][Collider::Type::BOX] = true;
 	matrix[Collider::Type::BOX][Collider::Type::NEAR] = true;
+	matrix[Collider::Type::BOX][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::BOX][Collider::Type::FAR] = true;
+
 
 	matrix[Collider::Type::NEAR][Collider::Type::WALL] = true;
 	matrix[Collider::Type::NEAR][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::NEAR][Collider::Type::BOX] = true;
 	matrix[Collider::Type::NEAR][Collider::Type::NEAR] = false;
+	matrix[Collider::Type::NEAR][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::NEAR][Collider::Type::FAR] = false;
+
+
+
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::WALL] = true;
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::BOX] = true;
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::NEAR] = true;
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::FAR] = true;
+
+
+	matrix[Collider::Type::FAR][Collider::Type::WALL] = false;
+	matrix[Collider::Type::FAR][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::FAR][Collider::Type::BOX] = false;
+	matrix[Collider::Type::FAR][Collider::Type::NEAR] = false;
+	matrix[Collider::Type::FAR][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::FAR][Collider::Type::FAR] = false;
+
+
 
 	
 }
@@ -87,9 +117,12 @@ bool Collisions::PreUpdate()
 
 bool Collisions::Update(float dt)
 {
-	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	{
 		debug = !debug;
 
+	}
 	return true;
 }
 
@@ -123,8 +156,14 @@ void Collisions::DebugDraw()
 		case Collider::Type::BOX: // red
 			app->render->DrawRectangle(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		case Collider::Type::NEAR: // green
-			app->render->DrawRectangle(colliders[i]->rect, 0, 125, 0, alpha);
+		case Collider::Type::NEAR: // yellow
+			app->render->DrawRectangle(colliders[i]->rect, 255, 255, 0, alpha);
+			break;
+		case Collider::Type::BOXMIDDLE: // white
+			app->render->DrawRectangle(colliders[i]->rect, 255, 255, 255, alpha);
+			break;
+		case Collider::Type::FAR: // yellow
+			app->render->DrawRectangle(colliders[i]->rect, 0, 0, 0, alpha);
 			break;
 		}
 	}

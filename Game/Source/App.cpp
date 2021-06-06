@@ -18,32 +18,35 @@
 #include <iostream>
 #include <sstream>
 
+#define NUM_MODULES		10
+#define FPS		30
+
 // Constructor
 App::App(int argc, char* args[]) : argc(argc), args(args)
 {
 	frames = 0;
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
-	player = new Player();
-	levelManager = new LevelManager();
-	tiles = new Tiles();
-	collisions = new Collisions();
-	boxManager = new BoxManager();
+	win = new Window(true);
+	input = new Input(true);
+	render = new Render(true);
+	tex = new Textures(true);
+	audio = new Audio(true);
+	player = new Player(false);
+	levelManager = new LevelManager(true);
+	tiles = new Tiles(false);
+	collisions = new Collisions(true);
+	boxManager = new BoxManager(false);
 
 
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(win);
+	AddModule(levelManager);
+	AddModule(tiles);
 	AddModule(input);
 	AddModule(tex);
 	AddModule(audio);
-	AddModule(levelManager);
-	AddModule(tiles);
 	AddModule(player);
 	AddModule(boxManager);
 	AddModule(collisions);
@@ -122,10 +125,10 @@ bool App::Start()
 // Called each loop iteration
 bool App::Update()
 {
-	bool ret = true;
+	//bool ret = true;
 	PrepareUpdate();
 
-	if(input->GetWindowEvent(WE_QUIT) == true)
+	/*if(input->GetWindowEvent(WE_QUIT) == true)
 		ret = false;
 
 	if(ret == true)
@@ -135,8 +138,19 @@ bool App::Update()
 		ret = DoUpdate();
 
 	if(ret == true)
-		ret = PostUpdate();
+		ret = PostUpdate();*/
 
+	bool ret = true;
+
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : true;
+
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->Update(dt) : true;
+
+	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
+		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : true;
+	
 	FinishUpdate();
 	return ret;
 }
@@ -167,11 +181,14 @@ bool App::LoadConfig()
 // ---------------------------------------------
 void App::PrepareUpdate()
 {
+	start = SDL_GetTicks();
+	
 }
 
 // ---------------------------------------------
 void App::FinishUpdate()
 {
+	if ((1000 / FPS) > SDL_GetTicks() - start) SDL_Delay(1000 / FPS - (SDL_GetTicks() - start));
 	// This is a good place to call Load / Save functions
 }
 

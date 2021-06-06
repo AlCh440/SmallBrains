@@ -4,7 +4,8 @@
  * Copyright (C) 2006-2015, by Arseny Kapoulkine (arseny.kapoulkine@gmail.com)
  * Report bugs and download new versions at http://pugixml.org/
  *
- * This library is distributed under the MIT License. See notice at the end
+ * 
+ library is distributed under the MIT License. See notice at the end
  * of this file.
  *
  * This work is based on the pugxml parser, which is:

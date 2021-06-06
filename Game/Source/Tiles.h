@@ -17,7 +17,7 @@ class Tiles : public Module
 public:
 
 
-	Tiles();
+	Tiles(bool startEnabled);
 
 	// Destructor
 	virtual ~Tiles();
@@ -33,11 +33,13 @@ public:
 
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	Collider* collWalls = nullptr;
 	SDL_Texture* spriteSheet;
 	SDL_Rect floor_01;
 	SDL_Rect floor_02;
 	SDL_Rect wall_01;
 	SDL_Rect wall_02;
+	SDL_Rect dot;
 
 };
 #endif // __TILES

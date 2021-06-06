@@ -31,6 +31,7 @@ int main(int argc, char* args[])
 
 	MainState state = CREATE;
 	int result = EXIT_FAILURE;
+	Uint32 start;
 
 	while(state != EXIT)
 	{

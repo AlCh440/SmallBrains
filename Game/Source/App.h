@@ -82,6 +82,7 @@ public:
 	Tiles* tiles;
 	Collisions* collisions;
 	BoxManager* boxManager;
+	Uint32 start;
 
 private:
 
