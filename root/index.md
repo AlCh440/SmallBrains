@@ -12,30 +12,22 @@ SmallBrains(TM) team were given the task to recreate first levels of this game.
 
 ## TEAM MEMBERS
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+
 
 - Albert Chica Ferrer - coder [AlCh440](https://github.com/AlCh440).
-- Pau García i Quiroga - artist
-- Ogylandy Yespagambetov - manager
-- Carlos Godoy Núñez - 
+- Pau García i Quiroga - artist [PaGaQi](https://github.com/PaGaQi)
+- Ogylandy Yespagambetov - manager [Oga29](https://github.com/Oga29)
+- Carlos Godoy Núñez -  [3cgn8](https://github.com/3cgn8)
 
 
-[Link](url) and ![Image](src)
-```
+ 
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AlCh440/SmallBrains/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+## Controls
+## Gameplay Video
+## Last Release
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
