@@ -1,38 +1,34 @@
 ## Super Soukoban
 
-You can use the [editor on GitHub](https://github.com/AlCh440/SmallBrains/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
 Super Soukoban is a puzzle video game  in which the player pushes boxes around in a warehouse, trying to get them to storage locations.
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+SmallBrains(TM) team were given the task to recreate first levels of this game.
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+<p align="center">
+  <img width="420" height="420" src="https://i.imgur.com/qjVNRKk.png">
+</p> 
 
-1. Numbered
-2. List
+## TEAM MEMBERS
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/AlCh440/SmallBrains/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+- Albert Chica Ferrer - coder [AlCh440](https://github.com/AlCh440).
+- Pau García i Quiroga - artist [PaGaQi](https://github.com/PaGaQi)
+- Ogylandy Yespagambetov - manager [Oga29](https://github.com/Oga29)
+- Carlos Godoy Núñez -  [3cgn8](https://github.com/3cgn8)
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+ 
+
+
+
+
+## Controls
+## Gameplay Video
+## Last Release
