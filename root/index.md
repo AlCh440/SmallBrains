@@ -3,6 +3,8 @@
 
 
 Super Soukoban is a puzzle video game  in which the player pushes boxes around in a warehouse, trying to get them to storage locations.
+
+SmallBrains(TM) team were given the task to recreate first levels of this game.
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
