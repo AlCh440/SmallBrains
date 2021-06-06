@@ -31,4 +31,5 @@ SmallBrains(TM) team were given the task to recreate first levels of this game.
 
 ## Controls
 ## Gameplay Video
+[Gameplay Video](https://youtu.be/JVo71hLOHHE)
 ## Last Release
