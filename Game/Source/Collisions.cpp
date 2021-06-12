@@ -32,7 +32,7 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::BOX][Collider::Type::BOX] = true;
 	matrix[Collider::Type::BOX][Collider::Type::NEAR] = true;
 	matrix[Collider::Type::BOX][Collider::Type::BOXMIDDLE] = true;
-	matrix[Collider::Type::BOX][Collider::Type::FAR] = true;
+	matrix[Collider::Type::BOX][Collider::Type::FAR] = false;
 
 
 	matrix[Collider::Type::NEAR][Collider::Type::WALL] = true;

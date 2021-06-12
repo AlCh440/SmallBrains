@@ -20,65 +20,121 @@ Player::Player(bool startEnabled) : Module(startEnabled) //
 	// Still
 	playerhitbox = { (int)positionX, (int)positionY, 24, 24 };
 
-	StillAnim.PushBack({ 1, 45, 14, 22});
+	StillAnim.PushBack({ 1, 51, 24, 24 });
 
 	StillAnim.loop = false;
 
 	// move up
-	upAnim.PushBack({ 1, 68, 14, 22 });
-	upAnim.PushBack({ 16, 68, 14, 22 });
-	upAnim.PushBack({ 31, 68, 14, 22 });
-	upAnim.PushBack({ 46, 68, 14, 22 });
-	upAnim.PushBack({ 61, 68, 14, 22 });
-	upAnim.PushBack({ 76, 68, 14, 22 });
-	upAnim.PushBack({ 91, 68, 14, 22 });
-	upAnim.PushBack({ 106, 68, 14, 22 });
-	upAnim.PushBack({ 1, 68, 14, 22 });
+	upAnim.PushBack({ 1, 76, 24, 24 });
+	upAnim.PushBack({ 26, 76, 24, 24 });
+	upAnim.PushBack({ 51, 76, 24, 24 });
+	upAnim.PushBack({ 76, 76, 24, 24 });
+	upAnim.PushBack({ 101, 76, 24, 24 });
+	upAnim.PushBack({ 126, 76, 24, 24 });
+	upAnim.PushBack({ 151, 76, 24, 24 });
+	upAnim.PushBack({ 176, 76, 24, 24 });
+	upAnim.PushBack({ 1, 76, 24, 24 });
 
 	upAnim.loop = false;
-	upAnim.speed = 0.2f;
+	upAnim.speed = 0.3f;
 
 	// move down
-	downAnim.PushBack({ 1, 1, 14, 20 });
-	downAnim.PushBack({ 16, 1, 14, 20 });
-	downAnim.PushBack({ 31, 1, 14, 20 });
-	downAnim.PushBack({ 46, 1, 14, 20 });
-	downAnim.PushBack({ 61, 1, 14, 20 });
-	downAnim.PushBack({ 76, 1, 14, 20 });
-	downAnim.PushBack({ 91, 1, 14, 20 });
-	downAnim.PushBack({ 106, 1, 14, 20 });
-	downAnim.PushBack({ 1, 1, 14, 20 });
+	downAnim.PushBack({ 1, 1, 24, 24 });
+	downAnim.PushBack({ 26, 1, 24, 24 });
+	downAnim.PushBack({ 51, 1, 24, 24 });
+	downAnim.PushBack({ 76, 1, 24, 24 });
+	downAnim.PushBack({ 101, 1, 24, 24 });
+	downAnim.PushBack({ 126, 1, 24, 24 });
+	downAnim.PushBack({ 151, 1, 24, 24 });
+	downAnim.PushBack({ 176, 1, 24, 24 });
+	downAnim.PushBack({ 1, 1, 24, 24 });
 
 	downAnim.loop = false;
-	downAnim.speed = 0.2f;
+	downAnim.speed = 0.3f;
 
 	// move left
-	leftAnim.PushBack({ 1, 22, 14, 22 });
-	leftAnim.PushBack({ 16, 22, 14, 22 });
-	leftAnim.PushBack({ 31, 22, 14, 22 });
-	leftAnim.PushBack({ 46, 22, 14, 22 });
-	leftAnim.PushBack({ 61, 22, 14, 22 });
-	leftAnim.PushBack({ 76, 22, 14, 22 });
-	leftAnim.PushBack({ 91, 22, 14, 22 });
-	leftAnim.PushBack({ 106, 22, 14, 22 });
-	leftAnim.PushBack({ 1, 22, 14, 22 });
+	leftAnim.PushBack({ 1, 26, 24, 24 });
+	leftAnim.PushBack({ 26, 26, 24, 24 });
+	leftAnim.PushBack({ 51, 26, 24, 24 });
+	leftAnim.PushBack({ 76, 26, 24, 24 });
+	leftAnim.PushBack({ 101, 26, 24, 24 });
+	leftAnim.PushBack({ 126, 26, 24, 24 });
+	leftAnim.PushBack({ 151, 26, 24, 24 });
+	leftAnim.PushBack({ 176, 26, 24, 24 });
+	leftAnim.PushBack({ 1, 26, 24, 24 });
 
 	leftAnim.loop = false;
-	leftAnim.speed = 0.2f;
+	leftAnim.speed = 0.3f;
 
 	// move right
-	rightAnim.PushBack({ 1, 45, 14, 22 });
-	rightAnim.PushBack({ 16, 45, 14, 22 });
-	rightAnim.PushBack({ 31, 45, 14, 22 });
-	rightAnim.PushBack({ 46, 45, 14, 22 });
-	rightAnim.PushBack({ 61, 45, 14, 22 });
-	rightAnim.PushBack({ 76, 45, 14, 22 });
-	rightAnim.PushBack({ 91, 45, 14, 22 });
-	rightAnim.PushBack({ 106, 45, 14, 22 });
-	rightAnim.PushBack({ 1, 45, 14, 22 });
+	rightAnim.PushBack({ 1, 51, 24, 24 });
+	rightAnim.PushBack({ 26, 51, 24, 24 });
+	rightAnim.PushBack({ 51, 51, 24, 24 });
+	rightAnim.PushBack({ 76, 51, 24, 24 });
+	rightAnim.PushBack({ 101, 51, 24, 24 });
+	rightAnim.PushBack({ 126, 51, 24, 24 });
+	rightAnim.PushBack({ 151, 51, 24, 24 });
+	rightAnim.PushBack({ 176, 51, 24, 24 });
+	rightAnim.PushBack({ 1, 51, 24, 24 });
 
 	rightAnim.loop = false;
-	rightAnim.speed = 0.2f;
+	rightAnim.speed = 0.3f;
+	
+	// move up pushing
+	upPushAnim.PushBack({ 1, 176, 24, 24 });
+	upPushAnim.PushBack({ 26, 176, 24, 24 });
+	upPushAnim.PushBack({ 51, 176, 24, 24 });
+	upPushAnim.PushBack({ 76, 176, 24, 24 });
+	upPushAnim.PushBack({ 101, 176, 24, 24 });
+	upPushAnim.PushBack({ 126, 176, 24, 24 });
+	upPushAnim.PushBack({ 151, 176, 24, 24 });
+	upPushAnim.PushBack({ 176, 176, 24, 24 });
+	upPushAnim.PushBack({ 1, 76, 24, 24 });
+
+	upPushAnim.loop = false;
+	upPushAnim.speed = 0.3f;
+
+	// move down pushing
+	downPushAnim.PushBack({ 1, 101, 24, 24 });
+	downPushAnim.PushBack({ 26, 101, 24, 24 });
+	downPushAnim.PushBack({ 51, 101, 24, 24 });
+	downPushAnim.PushBack({ 76, 101, 24, 24 });
+	downPushAnim.PushBack({ 101, 101, 24, 24 });
+	downPushAnim.PushBack({ 126, 101, 24, 24 });
+	downPushAnim.PushBack({ 151, 101, 24, 24 });
+	downPushAnim.PushBack({ 176, 101, 24, 24 });
+	downPushAnim.PushBack({ 1, 1, 24, 24 });
+
+	downPushAnim.loop = false;
+	downPushAnim.speed = 0.3f;
+
+	// move left pushing
+	leftPushAnim.PushBack({ 1, 151, 24, 24 });
+	leftPushAnim.PushBack({ 26, 151, 24, 24 });
+	leftPushAnim.PushBack({ 51, 151, 24, 24 });
+	leftPushAnim.PushBack({ 76, 151, 24, 24 });
+	leftPushAnim.PushBack({ 101, 151, 24, 24 });
+	leftPushAnim.PushBack({ 126, 151, 24, 24 });
+	leftPushAnim.PushBack({ 151, 151, 24, 24 });
+	leftPushAnim.PushBack({ 176, 151, 24, 24 });
+	leftPushAnim.PushBack({ 1, 26, 24, 24 });
+
+	leftPushAnim.loop = false;
+	leftPushAnim.speed = 0.3f;
+	
+	// move right pushing
+	rightPushAnim.PushBack({ 1, 126, 24, 24 });
+	rightPushAnim.PushBack({ 26, 126, 24, 24 });
+	rightPushAnim.PushBack({ 51, 126, 24, 24 });
+	rightPushAnim.PushBack({ 76, 126, 24, 24 });
+	rightPushAnim.PushBack({ 101, 126, 24, 24 });
+	rightPushAnim.PushBack({ 126, 126, 24, 24 });
+	rightPushAnim.PushBack({ 151, 126, 24, 24 });
+	rightPushAnim.PushBack({ 176, 126, 24, 24 });
+	rightPushAnim.PushBack({ 1, 51, 24, 24 });
+
+	rightPushAnim.loop = false;
+	rightPushAnim.speed = 0.3f;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -143,6 +199,7 @@ bool Player::LevelStart(int level)
 bool Player::Update(float dt)
 {	
 
+		
 		if (move)
 		{
 			if ((app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN) && (playerCanMove[2] == true))
@@ -150,7 +207,9 @@ bool Player::Update(float dt)
 				direction = 3; // Left
 				move = false;
 				leftAnim.Reset();
-				currentAnimation = &leftAnim;
+				leftPushAnim.Reset();
+				if (playerPushing[2]) currentAnimation = &leftPushAnim;
+				else currentAnimation = &leftAnim;
 				stepCount++;
 			}
 
@@ -159,7 +218,9 @@ bool Player::Update(float dt)
 				direction = 4; // Right
 				move = false;
 				rightAnim.Reset();
-				currentAnimation = &rightAnim;
+				rightPushAnim.Reset();
+				if (playerPushing[3]) currentAnimation = &rightPushAnim;
+				else currentAnimation = &rightAnim;
 				stepCount++;
 			}
 
@@ -168,7 +229,9 @@ bool Player::Update(float dt)
 				direction = 1; // Up
 				move = false;
 				upAnim.Reset();
-				currentAnimation = &upAnim;
+				upPushAnim.Reset();
+				if (playerPushing[0]) currentAnimation = &upPushAnim;
+				else currentAnimation = &upAnim;
 				stepCount++;
 			}
 
@@ -177,7 +240,9 @@ bool Player::Update(float dt)
 				direction = 2; // Down
 				move = false;
 				downAnim.Reset();
-				currentAnimation = &downAnim;
+				downAnim.Reset();
+				if (playerPushing[1]) currentAnimation = &downPushAnim;
+				else currentAnimation = &downAnim;
 				stepCount++;
 			}
 		}
@@ -186,19 +251,19 @@ bool Player::Update(float dt)
 			moveAction += 1;
 			if (direction == 1)
 			{
-				positionY -= 1.0f;
+				positionY -= 1;
 			}
 			else if (direction == 2)
 			{
-				positionY += 1.0f;
+				positionY += 1;
 			}
 			else if (direction == 3)
 			{
-				positionX -= 1.0f;
+				positionX -= 1;
 			}
 			else if (direction == 4)
 			{
-				positionX += 1.0f;
+				positionX += 1;
 
 			}
 		}
@@ -208,10 +273,9 @@ bool Player::Update(float dt)
 			moveAction = 0;
 		}
 
-
 		currentAnimation->Update();
 
-		app->render->DrawTexture(spriteSheet, positionX + 6, positionY, &currentAnimation->GetCurrentFrame());
+		app->render->DrawTexture(spriteSheet, positionX, positionY, &currentAnimation->GetCurrentFrame());
 
 		collPlayer->SetPos(positionX, positionY);
 
@@ -234,6 +298,10 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate()
 {
+	for (int i = 0; i < 4; i++)
+	{
+		playerPushing[i] = false;
+	}
 	return true;
 }
 
@@ -255,6 +323,26 @@ int Player::playerDirection()
 
 void Player::OnCollision(Collider* c1, Collider* c2)
 {
+	if (c2->type == Collider::Type::BOXMIDDLE)
+	{
+		if (c1 == collPlayerLeft)
+		{
+			playerPushing[2] = true;
+		}
+		else if (c1 == collPlayerRight)
+		{
+			playerPushing[3] = true;
+		}
+		else if (c1 == collPlayerUp)
+		{
+			playerPushing[0] = true;
+		}
+		else if (c1 == collPlayerDown)
+		{
+			playerPushing[1] = true;
+		}
+	}
+
 	if (c2->type == Collider::Type::WALL)
 	{
 		if (c1 == collPlayerLeft)
@@ -276,11 +364,11 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 	}
 	
-	/*if ((c1->type == Collider::Type::FAR) && (c2->type == Collider::Type::BOXMIDDLE))
+	if ((c1->type == Collider::Type::NEAR) && (c2->type == Collider::Type::BOXMIDDLE))
 	{
 		Collider* c3;
 		
-		if (c1 == collPlayerFarLeft)
+		if (c1 == collPlayerLeft)
 		{
 			for (uint k = 0; k < MAX_COLLIDERS; ++k)
 			{
@@ -289,14 +377,14 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 				c3 = app->collisions->colliders[k];
 
-				if ((c3->Intersects({ (int)positionX - 24, (int)positionY, 24, 24 })) && (c3->type == Collider::Type::BOXMIDDLE))
+				if (app->collisions->matrix[c3->type][Collider::Type::FAR] && c3->Intersects({ (int)positionX - 48, (int)positionY, 24, 24 }))
 				{
 					playerCanMove[2] = false;
 				}
 			}
 			
 		}
-		else if (c1 == collPlayerFarRight)
+		else if (c1 == collPlayerRight)
 		{
 			for (uint k = 0; k < MAX_COLLIDERS; ++k)
 			{
@@ -306,13 +394,13 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 				c3 = app->collisions->colliders[k];
 
-				if (app->collisions->matrix[c3->type][collPlayerRight->type] && c3->Intersects({ (int)positionX + 24, (int)positionY, 24, 24 }))
+				if (app->collisions->matrix[c3->type][Collider::Type::FAR] && c3->Intersects({ (int)positionX + 48, (int)positionY, 24, 24 }))
 				{
 					playerCanMove[3] = false;
 				}
 			}
 		}
-		else if (c1 == collPlayerFarUp)
+		else if (c1 == collPlayerUp)
 		{
 			for (uint k = 0; k < MAX_COLLIDERS; ++k)
 			{
@@ -322,13 +410,13 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 				c3 = app->collisions->colliders[k];
 
-				if (app->collisions->matrix[c3->type][collPlayerUp->type] && c3->Intersects({ (int)positionX, (int)positionY - 24, 24, 24 }))
+				if (app->collisions->matrix[c3->type][Collider::Type::FAR] && c3->Intersects({ (int)positionX, (int)positionY - 48, 24, 24 }))
 				{
 					playerCanMove[0] = false;
 				}
 			}
 		}
-		else if (c1 == collPlayerFarDown)
+		else if (c1 == collPlayerDown)
 		{
 			for (uint k = 0; k < MAX_COLLIDERS; ++k)
 			{
@@ -338,11 +426,11 @@ void Player::OnCollision(Collider* c1, Collider* c2)
 
 				c3 = app->collisions->colliders[k];
 
-				if (app->collisions->matrix[c3->type][collPlayerDown->type] && c3->Intersects({ (int)positionX, (int)positionY + 24, 24, 24 }))
+				if (app->collisions->matrix[c3->type][Collider::Type::FAR] && c3->Intersects({ (int)positionX, (int)positionY + 48, 24, 24 }))
 				{
 					playerCanMove[1] = false;
 				}
 			}
 		}
-	}*/
+	}
 }																		

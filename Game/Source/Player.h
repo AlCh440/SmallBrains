@@ -46,13 +46,14 @@ public:
 	
 
 	// Position of the player in the map
-	float positionX;
-	float positionY;
+	int positionX;
+	int positionY;
 	bool move;
+	bool playerPushing[4];
 	int direction;
 	int moveAction;
 	int step = 24;
-	int framesPerSprite = 14;
+	int framesPerSprite = 8;
 	int stepCount;
 	bool playerCanMove[4];
 	SDL_Rect playerhitbox;
@@ -70,7 +71,10 @@ public:
 	Animation downAnim;
 	Animation leftAnim;
 	Animation rightAnim;
-	SDL_Rect playerStill;
+	Animation upPushAnim;
+	Animation downPushAnim;
+	Animation leftPushAnim;
+	Animation rightPushAnim;
 
 	// The player's collider
 	//Collider* collider = nullptr;

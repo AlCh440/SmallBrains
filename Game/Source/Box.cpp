@@ -64,7 +64,6 @@ void Box::MoveBox(int direction)
 	else if (direction == 1) posY--;
 	else if (direction == 2) posY++;
 	else if (direction == 3) posX--;
-
 	move = true;
 }
 
