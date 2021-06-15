@@ -5,6 +5,7 @@
 #include "input.h"
 #include "Tiles.h"
 #include "Player.h"
+#include "Audio.h"
 #include "SDL/include/SDL.h"
 #include <iostream>
 
@@ -32,6 +33,10 @@ bool BoxManager::Start()
 	box_03->Start();
 	box_04->Start();
 	box_05->Start();
+	
+	
+	unableMusic = true;
+	unableMusic_02 = true;
 
 	return true;
 }
@@ -43,6 +48,12 @@ bool BoxManager::PreUpdate()
 
 bool BoxManager::Update(float dt)
 {
+	if (unableMusic)
+	{
+		if (app->levelManager->Getlvl() == 5 || app->levelManager->Getlvl() == 6 || app->levelManager->Getlvl() == 9) app->audio->PlayMusic("Assets/Audio/ogg/OGG/04_Physical Labor_A.Suda.ogg", 0.0f);
+		else app->audio->PlayMusic("Assets/Audio/ogg/OGG/05_Hard Labor_A.Suda.ogg", 0.0f);
+		unableMusic = false;
+	}
 	playLvl(dt);
 
 	if ((app->levelManager->Getlvl() == 5 || app->levelManager->Getlvl() == 6 || app->levelManager->Getlvl() == 9))
@@ -58,6 +69,12 @@ bool BoxManager::Update(float dt)
 			else if (app->levelManager->path_01 == 3) app->levelManager->lvl4Passed = true;
 			else if (app->levelManager->path_01 == 4) app->levelManager->lvl5Passed = true;
 			else if (app->levelManager->path_01 == 5) app->levelManager->lvl6Passed = true;
+
+			if (unableMusic_02)
+			{
+				app->audio->PlayMusic("Assets/Audio/ogg/OGG/07_Stage_Complete_A.Suda.ogg", 0.0f);
+				unableMusic_02 = false;
+			}
 		}
 	}
 	else if (app->levelManager->Getlvl() == 8 )

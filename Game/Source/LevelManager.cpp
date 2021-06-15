@@ -7,11 +7,12 @@
 #include "BoxManager.h"
 #include "Audio.h"
 #include "font.h"
+#include "FadeToBlack.h"
 
 #include <SDL\include\SDL.h>
 #include <iostream>
 
-//fade to black 25 frames!!!
+
 LevelManager::LevelManager(bool startEnabled) : Module(startEnabled)
 {
 	level = 0;
@@ -86,6 +87,8 @@ LevelManager::LevelManager(bool startEnabled) : Module(startEnabled)
 	stageLose = { 122, 156, 120, 64 };
 	stageEnd_01 = { 1, 221, 120, 34 };
 	stageEnd_02 = { 122, 221, 120, 34 } ;
+
+	unableMusic = true;
 }
 
 
@@ -109,6 +112,8 @@ bool LevelManager::Start()
 	inGameMenu = app->tex->Load("Assets/Textures/in_game_menu.png");
 
 	
+	app->audio->PlayMusic("Assets/Audio/ogg/OGG/01_Opening_A. Suda.ogg", .0f);
+	//app->audio->PlayMusic("02_Title_Screen_A_Suda.ogg", 1.0f);
 
 	positionXCar_01 = 0;
 	positionYCar_01 = 130;
@@ -134,7 +139,7 @@ bool LevelManager::Update(float dt)
 	if (level == 0)
 	{
 		app->render->DrawTexture(smallbrainsIntro, 0, 0);
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) lvlChange(1);
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) app->fadeToBlack->FadeNoModules(25, 1);
 	}
 	else if (level == 1) 
 	{
@@ -142,15 +147,11 @@ bool LevelManager::Update(float dt)
 		framesCounter++;
 		if (framesCounter > 60)
 		{	
-			framesCounter = 0;
-			lvlChange(2);
+			app->fadeToBlack->FadeNoModules(25, 2);
 		}
 	}
 	else if (level == 2)
 	{
-
-		app->audio->PlayMusic("Assets/Audio/WAV/01_Opening_A_Suda.wav", 1.0f);
-
 		backgroundIntro_01();
 		girlIntro();
 		efectsIntro();
@@ -161,9 +162,7 @@ bool LevelManager::Update(float dt)
 		framesCounter++;
 		if (framesCounter >= 1080 || app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			lvlChange(3);
-			
-			framesCounter = 0;
+			app->fadeToBlack->FadeNoModules(25, 3);
 			movementCount = 40;
 		}
 	}
@@ -204,7 +203,7 @@ bool LevelManager::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN && path_01 == 0)
 		{
 			path_01 = 0;
-			lvlChange(4);
+			app->fadeToBlack->FadeNoModules(25, 4);
 		}
 	}
 	else if (level == 4)
@@ -229,74 +228,44 @@ bool LevelManager::Update(float dt)
 		else if (app->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN && path_02 < 5) path_02++;
 		else if (app->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN && path_01 > 0) path_01--;
 		else if (app->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN && path_01 < 10) path_01++;
-		else if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) lvlChange(3); 
+		else if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN) app->fadeToBlack->FadeNoModules(25, 3);
 
 		if (path_02 == 0 && app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN)
 		{
 			if (path_01 == 0)
 			{
-				app->boxManager->Enable();
-				app->boxManager->InitializeLvl1();
-				app->player->Enable();
-				app->collisions->Enable();
-				app->player->positionX = (24 * 3);
-				app->player->positionY = (24 * 3);
-				lvlChange(5);
+				
+				app->fadeToBlack->FadeNoModules(25, 5);
 				path_02 = 0;
 			}
 			else if (path_01 == 1)
 			{
-				app->boxManager->Enable();
-				app->boxManager->InitializeLvl2();
-				app->player->Enable();
-				app->collisions->Enable();
-				app->player->positionX = 48;
-				app->player->positionY = 72;
-				lvlChange(6);
+				
+				app->fadeToBlack->FadeNoModules(25, 6);
 				path_02 = 0;
 			}
 			else if (path_01 == 2)
 			{
-				app->boxManager->Enable();
-				app->boxManager->InitializeLvl3();
-				app->player->Enable();
-				app->collisions->Enable();
-				app->player->positionX = (24 * 3);
-				app->player->positionY = (24 * 3);
-				lvlChange(7);
+				
+				app->fadeToBlack->FadeNoModules(25, 7);
 				path_02 = 0;
 			}
 			else if (path_01 == 3)
 			{
-				app->boxManager->Enable();
-				app->boxManager->InitializeLvl4();
-				app->player->Enable();
-				app->collisions->Enable();
-				app->player->positionX = (24 * 3);
-				app->player->positionY = (24 * 4);
-				lvlChange(8);
+				
+				app->fadeToBlack->FadeNoModules(25, 8);
 				path_02 = 0;
 			}
 			else if (path_01 == 4)
 			{
-				app->boxManager->Enable();
-				app->boxManager->InitializeLvl5();
-				app->player->Enable();
-				app->collisions->Enable();
-				app->player->positionX = (24 * 3);
-				app->player->positionY = (24 * 2);
-				lvlChange(9);
+				
+				app->fadeToBlack->FadeNoModules(25, 9);
 				path_02 = 0;
 			}
 			else if (path_01 == 5)
 			{
-				app->boxManager->Enable();
-				app->boxManager->InitializeLvl6();
-				app->player->Enable();
-				app->collisions->Enable();
-				app->player->positionX = (24 * 9);
-				app->player->positionY = (24 * 4);
-				lvlChange(10);
+				
+				app->fadeToBlack->FadeNoModules(25, 10);
 				path_02 = 0;
 			}
 			app->boxManager->unable = false;
@@ -312,16 +281,21 @@ bool LevelManager::Update(float dt)
 	sprintf_s(maxText, 10, "%4d", maxlvl1);
 	sprintf_s(lvl, 10, "%2d", path_01 + 1);
 
-	app->render->DrawTexture(inGameMenu, 150, 40, &stageCounter);
-	app->fonts->DrawText(194, 44, scoreFont, lvl);
-	app->fonts->DrawText(180, 65, scoreFont, maxText);
-	app->fonts->DrawText(180, 56, scoreFont, scoreText);
+	app->render->DrawRectangle({ 150, 10, 60, 35 }, 0, 0, 0, 200);
+	app->render->DrawTexture(inGameMenu, 150, 10, &stageCounter);
+	app->fonts->DrawText(194, 14, scoreFont, lvl);
+	app->fonts->DrawText(180, 35, scoreFont, maxText);
+	app->fonts->DrawText(180, 26, scoreFont, scoreText);
 	
 	if (score >= maxlvl1)
 	{
 		lvlPassed = true;
 		app->player->afterGame = true;
-
+		if (unableMusic)
+		{
+			app->audio->PlayMusic("assets/Audio/ogg/OGG/08_Failure_A.Suda.ogg", 0.0f);
+			unableMusic = false;
+		}
 	}
 	
 	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
@@ -348,10 +322,11 @@ bool LevelManager::Update(float dt)
 	sprintf_s(maxText, 10, "%4d", maxlvl2);
 	sprintf_s(lvl, 10, "%2d", path_01 + 1);
 
-	app->render->DrawTexture(inGameMenu, 150, 40, &stageCounter);
-	app->fonts->DrawText(194, 44, scoreFont, lvl);
-	app->fonts->DrawText(180, 65, scoreFont, maxText);
-	app->fonts->DrawText(180, 56, scoreFont, scoreText);
+	app->render->DrawRectangle({ 150, 10, 60, 35 }, 0, 0, 0, 200);
+	app->render->DrawTexture(inGameMenu, 150, 10, &stageCounter);
+	app->fonts->DrawText(194, 14, scoreFont, lvl);
+	app->fonts->DrawText(180, 35, scoreFont, maxText);
+	app->fonts->DrawText(180, 26, scoreFont, scoreText);
 
 	if (score >= maxlvl2)
 	{
@@ -375,144 +350,150 @@ bool LevelManager::Update(float dt)
 	}
 	else if (level == 7) // level 3
 	{
-	app->tiles->DrawArray(*backgroundLvl3, 11, 11);
+		app->tiles->DrawArray(*backgroundLvl3, 11, 11);
 
-	score = app->player->stepCount;
-	sprintf_s(scoreText, 10, "%4d", score);
+		score = app->player->stepCount;
+		sprintf_s(scoreText, 10, "%4d", score);
 
-	sprintf_s(maxText, 10, "%4d", maxlvl3);
-	sprintf_s(lvl, 10, "%2d", path_01 + 1);
+		sprintf_s(maxText, 10, "%4d", maxlvl3);
+		sprintf_s(lvl, 10, "%2d", path_01 + 1);
 
-	app->render->DrawTexture(inGameMenu, 150, 40, &stageCounter);
-	app->fonts->DrawText(194, 44, scoreFont, lvl);
-	app->fonts->DrawText(180, 65, scoreFont, maxText);
-	app->fonts->DrawText(180, 56, scoreFont, scoreText);
+		app->render->DrawRectangle({ 150, 10, 60, 35 }, 0, 0, 0, 200);
+		app->render->DrawTexture(inGameMenu, 150, 10, &stageCounter);
+		app->fonts->DrawText(194, 14, scoreFont, lvl);
+		app->fonts->DrawText(180, 35, scoreFont, maxText);
+		app->fonts->DrawText(180, 26, scoreFont, scoreText);
 
-	if (score >= maxlvl3)
-	{
-		lvlPassed = true;
-		app->player->afterGame = true;
-	}
+		if (score >= maxlvl3)
+		{
+			lvlPassed = true;
+			app->player->afterGame = true;
+		}
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		pause = !pause;
-		app->player->afterGame = true;
-	}
-	if (lvlPassed)
-	{
-		endGame();
-	}
-	else if (pause)
-	{
-		pauseMenu();
-	}
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		{
+			pause = !pause;
+			app->player->afterGame = true;
+		}
+		if (lvlPassed)
+		{
+			endGame();
+		}
+		else if (pause)
+		{
+			pauseMenu();
+		}
 	}
 	else if (level == 8) // level 4
 	{
-	app->tiles->DrawArray(*backgroundLvl4, 11, 11);
+		app->tiles->DrawArray(*backgroundLvl4, 11, 11);
 
-	score = app->player->stepCount;
-	sprintf_s(scoreText, 10, "%4d", score);
+		score = app->player->stepCount;
+		sprintf_s(scoreText, 10, "%4d", score);
 
-	sprintf_s(maxText, 10, "%4d", maxlvl4);
-	sprintf_s(lvl, 10, "%2d", path_01 + 1);
+		sprintf_s(maxText, 10, "%4d", maxlvl4);
+		sprintf_s(lvl, 10, "%2d", path_01 + 1);
 
-	app->render->DrawTexture(inGameMenu, 150, 40, &stageCounter);
-	app->fonts->DrawText(194, 44, scoreFont, lvl);
-	app->fonts->DrawText(180, 65, scoreFont, maxText);
-	app->fonts->DrawText(180, 56, scoreFont, scoreText);
+		app->render->DrawRectangle({ 150, 10, 60, 35 }, 0, 0, 0, 200);
+		app->render->DrawTexture(inGameMenu, 150, 10, &stageCounter);
+		app->fonts->DrawText(194, 14, scoreFont, lvl);
+		app->fonts->DrawText(180, 35, scoreFont, maxText);
+		app->fonts->DrawText(180, 26, scoreFont, scoreText);
 
-	if (score >= maxlvl4)
-	{
-		lvlPassed = true;
-		app->player->afterGame = true;
-	}
+		if (score >= maxlvl4)
+		{
+			lvlPassed = true;
+			app->player->afterGame = true;
+		}
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		pause = !pause;
-		app->player->afterGame = true;
-	}
-	if (lvlPassed)
-	{
-		endGame();
-	}
-	else if (pause)
-	{
-		pauseMenu();
-	}
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		{
+			pause = !pause;
+			app->player->afterGame = true;
+		}
+		if (lvlPassed)
+		{
+			endGame();
+		}
+		else if (pause)
+		{
+			pauseMenu();
+		}
 	}
 	else if (level == 9) // level 5
 	{
-	app->tiles->DrawArray(*backgroundLvl5, 11, 11);
+		app->tiles->DrawArray(*backgroundLvl5, 11, 11);
 
-	score = app->player->stepCount;
-	sprintf_s(scoreText, 10, "%4d", score);
+		score = app->player->stepCount;
+		sprintf_s(scoreText, 10, "%4d", score);
 
-	sprintf_s(maxText, 10, "%4d", maxlvl5);
-	sprintf_s(lvl, 10, "%2d", path_01 + 1);
+		sprintf_s(maxText, 10, "%4d", maxlvl5);
+		sprintf_s(lvl, 10, "%2d", path_01 + 1);
 
-	if (score >= maxlvl5)
-	{
-		lvlPassed = true;
-		app->player->afterGame = true;
+		if (score >= maxlvl5)
+		{
+			lvlPassed = true;
+			app->player->afterGame = true;
 
-	}
-	app->render->DrawTexture(inGameMenu, 150, 40, &stageCounter);
-	app->fonts->DrawText(194, 44, scoreFont, lvl);
-	app->fonts->DrawText(180, 65, scoreFont, maxText);
-	app->fonts->DrawText(180, 56, scoreFont, scoreText);
+		}
+		app->render->DrawRectangle({ 150, 10, 60, 35 }, 0, 0, 0, 200);
+		app->render->DrawTexture(inGameMenu, 150, 10, &stageCounter);
+		app->fonts->DrawText(194, 14, scoreFont, lvl);
+		app->fonts->DrawText(180, 35, scoreFont, maxText);
+		app->fonts->DrawText(180, 26, scoreFont, scoreText);
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		pause = !pause;
-		app->player->afterGame = true;
-	}
-	if (lvlPassed)
-	{
-		endGame();
-	}
-	else if (pause)
-	{
-		pauseMenu();
-	}
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		{
+			pause = !pause;
+			app->player->afterGame = true;
+		}
+		if (lvlPassed)
+		{
+			endGame();
+		}
+		else if (pause)
+		{
+			pauseMenu();
+		}
 	}
 	else if (level == 10) // level 6
 	{
-	app->tiles->DrawArray(*backgroundLvl6, 11, 11);
+		app->tiles->DrawArray(*backgroundLvl6, 11, 11);
 
-	score = app->player->stepCount;
-	sprintf_s(scoreText, 10, "%4d", score);
+		score = app->player->stepCount;
+		sprintf_s(scoreText, 10, "%4d", score);
 
-	sprintf_s(maxText, 10, "%4d", maxlvl6);
-	sprintf_s(lvl, 10, "%2d", path_01 + 1);
+		sprintf_s(maxText, 10, "%4d", maxlvl6);
+		sprintf_s(lvl, 10, "%2d", path_01 + 1);
 
-	app->render->DrawTexture(inGameMenu, 150, 40, &stageCounter);
-	app->fonts->DrawText(194, 44, scoreFont, lvl);
-	app->fonts->DrawText(180, 65, scoreFont, maxText);
-	app->fonts->DrawText(180, 56, scoreFont, scoreText);
+		app->render->DrawRectangle({ 150, 10, 60, 35 }, 0, 0, 0, 200);
+		app->render->DrawTexture(inGameMenu, 150, 10, &stageCounter);
+		app->fonts->DrawText(194, 14, scoreFont, lvl);
+		app->fonts->DrawText(180, 35, scoreFont, maxText);
+		app->fonts->DrawText(180, 26, scoreFont, scoreText);
 
-	if (score >= maxlvl6)
-	{
-		lvlPassed = true;
-		app->player->afterGame = true;
-	}
+		if (score >= maxlvl6)
+		{
+			lvlPassed = true;
+			app->player->afterGame = true;
+		}
 
-	if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
-	{
-		pause = !pause;
-		app->player->afterGame = true;
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
+		{
+			pause = !pause;
+			app->player->afterGame = true;
+		}
+		if (lvlPassed)
+		{
+			endGame();
+		}
+		else if (pause)
+		{
+			pauseMenu();
+		}
 	}
-	if (lvlPassed)
-	{
-		endGame();
-	}
-	else if (pause)
-	{
-		pauseMenu();
-	}
-	}
+	
+	
 
 
 
@@ -527,9 +508,9 @@ void LevelManager::lvlChange(int change)
 
 void LevelManager::Logo()
 {
-	if (framesCounter == 15);// time fade to black 
-	else if (framesCounter >= 47 && framesCounter < 62) app->render->DrawTexture(companyLogo, 0, 0);// still
-	else if (framesCounter == 62); // fade from black
+	
+	 app->render->DrawTexture(companyLogo, 0, 0);// still
+
 }
 
 void LevelManager::girlIntro()
@@ -724,7 +705,7 @@ void LevelManager::endGame()
 					lvlPassed = false;
 					app->player->afterGame = false;
 					app->tiles->BoxOnDotCount = 0;
-					lvlChange(6);
+					app->fadeToBlack->FadeNoModules(25, 6);
 				}
 				else if (path_01 == 1)
 				{
@@ -735,7 +716,7 @@ void LevelManager::endGame()
 					lvlPassed = false;
 					app->player->afterGame = false;
 					app->tiles->BoxOnDotCount = 0;
-					lvlChange(7);
+					app->fadeToBlack->FadeNoModules(25, 7);
 				}
 				else if (path_01 == 2)
 				{
@@ -746,7 +727,7 @@ void LevelManager::endGame()
 					lvlPassed = false;
 					app->player->afterGame = false;
 					app->tiles->BoxOnDotCount = 0;
-					lvlChange(8);
+					app->fadeToBlack->FadeNoModules(25, 8);
 				}
 				else if (path_01 == 3)
 				{
@@ -757,7 +738,7 @@ void LevelManager::endGame()
 					lvlPassed = false;
 					app->player->afterGame = false;
 					app->tiles->BoxOnDotCount = 0;
-					lvlChange(9);
+					app->fadeToBlack->FadeNoModules(25, 9);
 				}
 				else if (path_01 == 4)
 				{
@@ -768,12 +749,15 @@ void LevelManager::endGame()
 					lvlPassed = false;
 					app->player->afterGame = false;
 					app->tiles->BoxOnDotCount = 0;
-					lvlChange(10);
+					app->fadeToBlack->FadeNoModules(25, 10);
 				}
 				lvlPassed = false;
 			}
 			app->collisions->RemoveColliderType(Collider::Type::WALL);
 			win = false;
+			app->boxManager->unableMusic = true;
+			app->boxManager->unableMusic_02 = true;
+			unableMusic = true;
 		}
 	}
 	else
@@ -844,6 +828,9 @@ void LevelManager::endGame()
 				lvlPassed = false;
 				app->player->stepCount = 0;
 				score = 0;
+				app->boxManager->unableMusic = true;
+				app->boxManager->unableMusic_02 = true;
+				unableMusic = true;
 			}
 		}
 	}
@@ -858,6 +845,13 @@ void LevelManager::pauseMenu()
 	else if (pathMenu == 1)	app->render->DrawTexture(inGameMenu, 75, 90, &stageMenu_02);
 	else if (pathMenu == 2) app->render->DrawTexture(inGameMenu, 75, 90, &stageMenu_03);
 	else if (pathMenu == 3) app->render->DrawTexture(inGameMenu, 75, 90, &stageMenu_04);
+
+	if (path_01 == 0) app->render->DrawTexture(inGameMenu, 160, 95, &stageLevel_01);
+	else if (path_01 == 1) app->render->DrawTexture(inGameMenu, 160, 95, &stageLevel_02);
+	else if (path_01 == 2) app->render->DrawTexture(inGameMenu, 160, 95, &stageLevel_03);
+	else if (path_01 == 3) app->render->DrawTexture(inGameMenu, 160, 95, &stageLevel_04);
+	else if (path_01 == 4) app->render->DrawTexture(inGameMenu, 160, 95, &stageLevel_05);
+	else if (path_01 == 5) app->render->DrawTexture(inGameMenu, 160, 95, &stageLevel_06);
 
 	if (app->input->GetKey(SDL_SCANCODE_J) == KEY_DOWN) 
 	{
@@ -880,7 +874,7 @@ void LevelManager::pauseMenu()
 			{
 				app->boxManager->CleanUp();
 				app->boxManager->Start();
-				app->boxManager->InitializeLvl1();
+				app->boxManager->InitializeLvl2();
 				app->player->positionX = 48;
 				app->player->positionY = 72;
 				pathMenu = 0;
@@ -893,7 +887,7 @@ void LevelManager::pauseMenu()
 			{
 				app->boxManager->CleanUp();
 				app->boxManager->Start();
-				app->boxManager->InitializeLvl1();
+				app->boxManager->InitializeLvl3();
 				app->player->positionX = (24 * 4);
 				app->player->positionY = (24 * 4);
 				pathMenu = 0;
@@ -906,7 +900,7 @@ void LevelManager::pauseMenu()
 			{
 				app->boxManager->CleanUp();
 				app->boxManager->Start();
-				app->boxManager->InitializeLvl1();
+				app->boxManager->InitializeLvl4();
 				app->player->positionX = (24 * 5);
 				app->player->positionY = (24 * 4);
 				pathMenu = 0;
@@ -919,7 +913,7 @@ void LevelManager::pauseMenu()
 			{
 				app->boxManager->CleanUp();
 				app->boxManager->Start();
-				app->boxManager->InitializeLvl1();
+				app->boxManager->InitializeLvl5();
 				app->player->positionX = (24 * 3);
 				app->player->positionY = (24 * 4);
 				pathMenu = 0;
@@ -932,7 +926,7 @@ void LevelManager::pauseMenu()
 			{
 				app->boxManager->CleanUp();
 				app->boxManager->Start();
-				app->boxManager->InitializeLvl1();
+				app->boxManager->InitializeLvl6();
 				app->player->positionX = (24 * 5);
 				app->player->positionY = (24 * 10);
 				pathMenu = 0;
@@ -950,7 +944,7 @@ void LevelManager::pauseMenu()
 			app->collisions->Disable();
 			path_01 = 0;
 			path_02 = 0;
-			lvlChange(4);
+			app->fadeToBlack->FadeNoModules(25, 4);
 			pause = false;
 		}
 		else if (pathMenu == 3)
@@ -961,7 +955,7 @@ void LevelManager::pauseMenu()
 			app->collisions->Disable();
 			path_01 = 0;
 			path_02 = 0;
-			lvlChange(3);
+			app->fadeToBlack->FadeNoModules(25, 3);
 			pause = false;
 		}
 		app->player->afterGame = false;

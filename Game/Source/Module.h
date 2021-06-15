@@ -94,7 +94,6 @@ public:
 		return isEnabled; 
 	}
 
-private:
 	bool isEnabled = true;
 
 };

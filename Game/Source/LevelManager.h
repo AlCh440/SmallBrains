@@ -9,12 +9,11 @@ struct SDL_Texture;
 
 class LevelManager : public Module
 {
-private:
+public:
 
 	int level;
 	int framesCounter;
 
-public:
 
 	int boxes_lvl = 0;
 
@@ -57,6 +56,8 @@ public:
 	int movementCount;
 	bool lvlPassed;
 	bool pause;
+	bool unableMusic;
+	int futureLvl;
 
 	int maxlvl1;
 	int maxlvl2;

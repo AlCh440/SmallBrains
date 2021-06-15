@@ -174,17 +174,17 @@ bool Player::Start()
 		direction = 1;
 		stepCount = 0;
 
-		collPlayer = app->collisions->AddCollider({ (int)positionX, (int)positionY, 24, 24 }, Collider::Type::PLAYER, this);
+		collPlayer = app->collisions->AddCollider({ (int)positionX, (int)positionY, 24, 24 }, Collider::Type::PLAYER, app->player);
 
-		collPlayerRight = app->collisions->AddCollider({ (int)positionX + 24, (int)positionY, 24, 24 }, Collider::Type::NEAR, this);
-		collPlayerLeft = app->collisions->AddCollider({ (int)positionX - 24, (int)positionY, 24, 24 }, Collider::Type::NEAR, this);
-		collPlayerUp = app->collisions->AddCollider({ (int)positionX, (int)positionY - 24, 24, 24 }, Collider::Type::NEAR, this);
-		collPlayerDown = app->collisions->AddCollider({ (int)positionX, (int)positionY + 24, 24, 24 }, Collider::Type::NEAR, this);
+		collPlayerRight = app->collisions->AddCollider({ (int)positionX + 24, (int)positionY, 24, 24 }, Collider::Type::NEAR, app->player);
+		collPlayerLeft = app->collisions->AddCollider({ (int)positionX - 24, (int)positionY, 24, 24 }, Collider::Type::NEAR, app->player);
+		collPlayerUp = app->collisions->AddCollider({ (int)positionX, (int)positionY - 24, 24, 24 }, Collider::Type::NEAR, app->player);
+		collPlayerDown = app->collisions->AddCollider({ (int)positionX, (int)positionY + 24, 24, 24 }, Collider::Type::NEAR, app->player);
 
-		collPlayerFarRight = app->collisions->AddCollider({ (int)positionX + 48, (int)positionY, 24, 24 }, Collider::Type::FAR, this);
-		collPlayerFarLeft = app->collisions->AddCollider({ (int)positionX - 48, (int)positionY, 24, 24 }, Collider::Type::FAR, this);
-		collPlayerFarUp = app->collisions->AddCollider({ (int)positionX, (int)positionY - 48, 24, 24 }, Collider::Type::FAR, this);
-		collPlayerFarDown = app->collisions->AddCollider({ (int)positionX, (int)positionY + 48, 24, 24 }, Collider::Type::FAR, this);
+		collPlayerFarRight = app->collisions->AddCollider({ (int)positionX + 48, (int)positionY, 24, 24 }, Collider::Type::FAR, app->player);
+		collPlayerFarLeft = app->collisions->AddCollider({ (int)positionX - 48, (int)positionY, 24, 24 }, Collider::Type::FAR, app->player);
+		collPlayerFarUp = app->collisions->AddCollider({ (int)positionX, (int)positionY - 48, 24, 24 }, Collider::Type::FAR, app->player);
+		collPlayerFarDown = app->collisions->AddCollider({ (int)positionX, (int)positionY + 48, 24, 24 }, Collider::Type::FAR, app->player);
 
 		afterGame = false;
 		count = false;
@@ -314,7 +314,7 @@ bool Player::PostUpdate()
 bool Player::CleanUp()
 {
 
-	app->collisions->RemoveCollider(collPlayer);
+	/*app->collisions->RemoveCollider(collPlayer);
 	app->collisions->RemoveCollider(collPlayerDown);
 	app->collisions->RemoveCollider(collPlayerUp);
 	app->collisions->RemoveCollider(collPlayerLeft);
@@ -323,7 +323,7 @@ bool Player::CleanUp()
 	app->collisions->RemoveCollider(collPlayerFarRight);
 	app->collisions->RemoveCollider(collPlayerFarUp);
 	app->collisions->RemoveCollider(collPlayerFarDown);
-
+	*/
 
 
 	return true;

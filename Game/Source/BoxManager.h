@@ -41,6 +41,8 @@ public:
 	Box* box_04;
 	Box* box_05;
 
+	bool unableMusic;
+	bool unableMusic_02;
 	bool unable;
 };
 

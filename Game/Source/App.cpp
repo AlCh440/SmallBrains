@@ -20,7 +20,7 @@
 #include <iostream>
 #include <sstream>
 
-#define NUM_MODULES		11
+#define NUM_MODULES		12
 #define FPS		30
 
 // Constructor
@@ -38,7 +38,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	tiles = new Tiles(false);
 	collisions = new Collisions(false);
 	boxManager = new BoxManager(false);
-	//fadeToBlack = new FadeToBlack(true);
+	fadeToBlack = new FadeToBlack(true);
 	fonts = new Fonts(true);
 
 
@@ -47,7 +47,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	// Reverse order of CleanUp
 	AddModule(win);
 	AddModule(levelManager);
-	//AddModule(fadeToBlack);
+	AddModule(fadeToBlack);
 	AddModule(tiles);
 	AddModule(input);
 	AddModule(tex);
