@@ -38,7 +38,17 @@ S-Down
 D-Right
 J-enter
 L-menu
+  
+  
+  
+  
 ## Gameplay Video
+  
+  
+  
 
 [![IMAGE ALT TEXT](https://i.imgur.com/MAYINre.jpg)](https://youtu.be/dwiJZcfFLl4)
+  
+  
+  
 ## Last Release
