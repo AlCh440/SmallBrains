@@ -52,3 +52,5 @@ L-menu
   
   
 ## Last Release
+  
+  https://github.com/AlCh440/SmallBrains/releases/tag/1.0
