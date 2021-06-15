@@ -14,7 +14,8 @@ SmallBrains(TM) team were given the task to recreate first levels of this game.
 
 ## TEAM MEMBERS
 
-
+<p align="center">
+  <img width="420" height="420" src="https://i.imgur.com/atZXyhS.png">
 
 
 
