@@ -30,6 +30,13 @@ SmallBrains(TM) team were given the task to recreate first levels of this game.
 
 
 ## Controls
+
+W-Up
+A-Left
+S-Down
+D-Right
+J-enter
+L-menu
 ## Gameplay Video
 
 [![IMAGE ALT TEXT](https://i.imgur.com/MAYINre.jpg)](https://youtu.be/dwiJZcfFLl4)
