@@ -32,5 +32,5 @@ SmallBrains(TM) team were given the task to recreate first levels of this game.
 ## Controls
 ## Gameplay Video
 
-[![IMAGE ALT TEXT](https://i.imgur.com/MAYINre.jpg)]()
+[![IMAGE ALT TEXT](https://i.imgur.com/MAYINre.jpg)](https://youtu.be/dwiJZcfFLl4)
 ## Last Release
