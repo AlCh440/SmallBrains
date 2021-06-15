@@ -33,9 +33,12 @@ public:
 	int posX;
 	int posY;
 	bool move;
+	bool onDot;
+	bool count;
 
 	SDL_Texture* spriteSheet;
 	SDL_Rect box;
+	SDL_Rect boxOnDot;
 
 	Collider* collBox = nullptr;
 

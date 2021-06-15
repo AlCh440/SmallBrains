@@ -29,6 +29,9 @@ bool Tiles::Start()
 
 bool Tiles::CleanUp()
 {
+    app->collisions->RemoveColliderType(Collider::Type::WALL);
+    app->collisions->RemoveColliderType(Collider::Type::DOT);
+
     return true;
 }
 
@@ -51,12 +54,14 @@ void Tiles::DrawArray(int* arr, int row, int col)
                 app->collisions->AddCollider({ j * 24, i * 24, 24, 24 }, Collider::Type::WALL, this);
 
             }
-            else if (*(arr + row * i + j) == 5) app->render->DrawTexture(spriteSheet, j * 24, i * 24, &dot);
+            else if (*(arr + row * i + j) == 5) {
+                app->render->DrawTexture(spriteSheet, j * 24, i * 24, &dot);
+                app->collisions->AddCollider({ j * 24, i * 24, 24, 24 }, Collider::Type::DOT, this);
+            }
         }
     }
 }
 
 void Tiles::OnCollision(Collider* c1, Collider* c2)
 {
-
 }

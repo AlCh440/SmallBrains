@@ -16,6 +16,8 @@ public:
 
 	bool Start() override;
 
+	bool PreUpdate() override;
+
 	bool Update(float dt) override;
 
 	void playLvl(float dt);
@@ -37,7 +39,9 @@ public:
 	Box* box_02;
 	Box* box_03;
 	Box* box_04;
+	Box* box_05;
 
+	bool unable;
 };
 
 #endif 

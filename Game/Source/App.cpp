@@ -11,6 +11,8 @@
 #include "BoxManager.h"
 #include "Tiles.h"
 #include "Box.h"
+#include "FadeToBlack.h"
+#include "font.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -18,7 +20,7 @@
 #include <iostream>
 #include <sstream>
 
-#define NUM_MODULES		10
+#define NUM_MODULES		11
 #define FPS		30
 
 // Constructor
@@ -34,8 +36,10 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	player = new Player(false);
 	levelManager = new LevelManager(true);
 	tiles = new Tiles(false);
-	collisions = new Collisions(true);
+	collisions = new Collisions(false);
 	boxManager = new BoxManager(false);
+	//fadeToBlack = new FadeToBlack(true);
+	fonts = new Fonts(true);
 
 
 
@@ -43,6 +47,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	// Reverse order of CleanUp
 	AddModule(win);
 	AddModule(levelManager);
+	//AddModule(fadeToBlack);
 	AddModule(tiles);
 	AddModule(input);
 	AddModule(tex);
@@ -50,6 +55,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(player);
 	AddModule(boxManager);
 	AddModule(collisions);
+	AddModule(fonts);
 	
 
 	// Render last to swap buffer
@@ -128,31 +134,20 @@ bool App::Update()
 	//bool ret = true;
 	PrepareUpdate();
 
-	/*if(input->GetWindowEvent(WE_QUIT) == true)
-		ret = false;
 
-	if(ret == true)
-		ret = PreUpdate();
+	for (int i = 0; i < NUM_MODULES; ++i) {
+		if (modules[i]->IsEnabled()) modules[i]->PreUpdate();
+	}
+		//modules[i]->IsEnabled() ? modules[i]->PreUpdate() : true;
 
-	if(ret == true)
-		ret = DoUpdate();
+	for (int i = 0; i < NUM_MODULES == true; ++i)
+		modules[i]->IsEnabled() ? modules[i]->Update(dt) : true;
 
-	if(ret == true)
-		ret = PostUpdate();*/
-
-	bool ret = true;
-
-	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->PreUpdate() : true;
-
-	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->Update(dt) : true;
-
-	for (int i = 0; i < NUM_MODULES && ret == true; ++i)
-		ret = modules[i]->IsEnabled() ? modules[i]->PostUpdate() : true;
+	for (int i = 0; i < NUM_MODULES == true; ++i)
+		modules[i]->IsEnabled() ? modules[i]->PostUpdate() : true;
 	
 	FinishUpdate();
-	return ret;
+	return true;
 }
 
 // Load config from XML file

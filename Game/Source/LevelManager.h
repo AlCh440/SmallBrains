@@ -36,7 +36,10 @@ public:
 	void efectsIntro();
 	void backgroundIntro_01();
 	void backgroundIntro_02();
+
+	void endGame();
 	
+	void pauseMenu();
 
 	void Lose();
 
@@ -47,8 +50,20 @@ public:
 	int win = 0;
 	int max_steps = 0;
 	bool introMusic;
-	int pathX;
-	int pathY;
+	int path_01;
+	int path_02;
+	int path_03;
+	int pathMenu;
+	int movementCount;
+	bool lvlPassed;
+	bool pause;
+
+	int maxlvl1;
+	int maxlvl2;
+	int maxlvl3;
+	int maxlvl4;
+	int maxlvl5;
+	int maxlvl6;
 
 	SDL_Texture* smallbrainsIntro;
 	SDL_Texture* intro_01;
@@ -57,6 +72,8 @@ public:
 	SDL_Texture* menu;
 	SDL_Texture* menuBackground;
 	SDL_Texture* levelSelector;
+	SDL_Texture* companyLogo;
+	SDL_Texture* inGameMenu;
 
 	int positionXCar_01;
 	int positionYCar_01;
@@ -102,6 +119,46 @@ public:
 	SDL_Rect menuSelector_02;
 	SDL_Rect pasword;
 	SDL_Rect cloud;
+	SDL_Rect lvlIcon_01;
+	SDL_Rect lvlIcon_02;
+	SDL_Rect lvlIcon_03;
+	SDL_Rect lvlIcon_04;
+	SDL_Rect lvlIcon_05;
+	SDL_Rect lvlIcon_06;
+
+	SDL_Rect menuBackground_01;
+	SDL_Rect menuBackground_02;
+
+	SDL_Rect stageCounter;
+	SDL_Rect stageMenu_01;
+	SDL_Rect stageMenu_02;
+	SDL_Rect stageMenu_03;
+	SDL_Rect stageMenu_04;
+	SDL_Rect stageLevel_01;
+	SDL_Rect stageLevel_02;
+	SDL_Rect stageLevel_03;
+	SDL_Rect stageLevel_04;
+	SDL_Rect stageLevel_05;
+	SDL_Rect stageLevel_06;
+	SDL_Rect stagePause;
+	SDL_Rect stageWin;
+	SDL_Rect stageLose;
+	SDL_Rect stageEnd_01;
+	SDL_Rect stageEnd_02;
+
+	int score = 000;
+	int scoreFont = -1;
+	char scoreText[150] = { "\0" };
+	char maxText[150] = { "\0" };
+	char lvl[10] = { "\0" };
+	std::string score_01;
+
+	bool lvl1Passed;
+	bool lvl2Passed;
+	bool lvl3Passed;
+	bool lvl4Passed;
+	bool lvl5Passed;
+	bool lvl6Passed;
 
 	int backgroundLvl1[11][11] =
 	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -121,17 +178,73 @@ public:
 	int backgroundLvl2[11][11] =
 	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
 		{2, 4, 3, 3, 3, 4, 2, 2, 2, 2, 2},
-		{2, 4, 1, 1, 1, 4, 2, 2, 2, 2, 2},
 		{2, 4, 1, 1, 1, 4, 2, 4, 3, 4, 2},
+		{2, 4, 1, 1, 1, 4, 2, 4, 5, 4, 2},
 		{2, 3, 1, 1, 1, 3, 3, 3, 5, 4, 2},
 		{2, 2, 4, 3, 1, 1, 1, 1, 5, 4, 2},
-		{2, 2, 4, 1, 1, 1, 4, 1, 5, 4, 2},
+		{2, 2, 4, 1, 1, 1, 4, 1, 1, 4, 2},
 		{2, 2, 4, 1, 1, 1, 4, 3, 3, 3, 2},
 		{2, 2, 3, 3, 3, 3, 3, 2, 2, 2, 2},
 		{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
 
 	};
 
+	int backgroundLvl3[11][11] =
+	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+	{2, 2, 2, 4, 3, 3, 4, 2, 2, 2, 2},
+	{2, 2, 4, 3, 1, 1, 4, 2, 2, 2, 2},
+	{2, 2, 4, 1, 1, 1, 4, 2, 2, 2, 2},
+	{2, 2, 4, 4, 1, 1, 3, 4, 2, 2, 2},
+	{2, 2, 4, 3, 1, 1, 1, 4, 2, 2, 2},
+	{2, 2, 4, 5, 1, 1, 1, 4, 2, 2, 2},
+	{2, 2, 4, 5, 5, 5, 5, 4, 2, 2, 2},
+	{2, 2, 3, 3, 3, 3, 3, 3, 2, 2, 2},
+	{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+
+	};
+
+	int backgroundLvl4[11][11] =
+	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+	{2, 2, 4, 3, 3, 3, 3, 3, 4, 2, 2},
+	{2, 2, 4, 1, 1, 1, 1, 1, 3, 3, 4},
+	{2, 4, 3, 1, 3, 3, 3, 1, 1, 1, 4},
+	{2, 4, 1, 1, 1, 1, 1, 1, 1, 1, 4},
+	{2, 4, 1, 5, 5, 4, 1, 1, 1, 4, 3},
+	{2, 3, 4, 5, 5, 4, 1, 1, 1, 4, 2},
+	{2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2},
+	{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+	{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+
+	};
+
+	int backgroundLvl5[11][11] = 
+	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+	{2, 2, 4, 3, 3, 4, 2, 2, 2, 2, 2},
+	{2, 2, 4, 1, 1, 3, 3, 4, 2, 2, 2},
+	{2, 2, 4, 1, 1, 1, 1, 4, 2, 2, 2},
+	{2, 4, 3, 4, 1, 4, 1, 3, 4, 2, 2},
+	{2, 4, 5, 3, 1, 3, 1, 1, 4, 2, 2},
+	{2, 4, 5, 1, 1, 1, 3, 1, 4, 2, 2},
+	{2, 4, 5, 1, 1, 1, 1, 1, 4, 2, 2},
+	{2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2},
+	{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+
+	};
+
+	int backgroundLvl6[11][11] = 
+	{ {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+	{2, 2, 2, 2, 4, 3, 3, 3, 3, 4, 2},
+	{2, 2, 4, 3, 3, 1, 1, 1, 1, 4, 2},
+	{2, 4, 3, 5, 1, 1, 3, 3, 1, 3, 4},
+	{2, 4, 5, 5, 1, 1, 1, 1, 1, 1, 4},
+	{2, 4, 5, 5, 1, 1, 1, 1, 1, 4, 3},
+	{2, 3, 3, 3, 3, 3, 4, 1, 1, 4, 2},
+	{2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2},
+	{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+	{2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+
+	};
 };
+
 
 #endif

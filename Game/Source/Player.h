@@ -41,6 +41,8 @@ public:
 
 	int playerDirection();
 
+	void drawPlayer();
+
 	//Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 	
@@ -52,10 +54,12 @@ public:
 	bool playerPushing[4];
 	int direction;
 	int moveAction;
-	int step = 24;
+	int step = 8;
 	int framesPerSprite = 8;
 	int stepCount;
 	bool playerCanMove[4];
+	bool afterGame;
+	bool count;
 	SDL_Rect playerhitbox;
 
 	// The player spritesheet loaded into an SDL_Texture

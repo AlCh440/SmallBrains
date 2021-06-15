@@ -3,7 +3,7 @@
 
 #include "SDL/include/SDL_Rect.h"
 
-#define MAX_LISTENERS 7
+#define MAX_LISTENERS 8
 
 class Module;
 
@@ -18,6 +18,7 @@ struct Collider
 		NEAR,
 		BOXMIDDLE,
 		FAR,
+		DOT,
 
 		MAX
 	};

@@ -40,9 +40,9 @@ bool Window::Awake(pugi::xml_node& config)
 		bool resizable = config.child("resizable").attribute("value").as_bool(false);
 		bool fullscreen_window = config.child("fullscreen_window").attribute("value").as_bool(false);
 
-		width = 1280;
-		height = 960;
 		scale = 4;
+		width = 256 * scale;
+		height = 224 * scale;
 
 		if(fullscreen == true) flags |= SDL_WINDOW_FULLSCREEN;
 		if(borderless == true) flags |= SDL_WINDOW_BORDERLESS;

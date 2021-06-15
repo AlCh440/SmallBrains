@@ -1,7 +1,7 @@
 #ifndef __COLLISIONS_H__
 #define __COLLISIONS_H__
 
-#define MAX_COLLIDERS 100
+#define MAX_COLLIDERS 150
 
 #include "Module.h"
 #include "Collider.h"
@@ -37,6 +37,8 @@ public:
 
 	// Removes the collider memory and removes it from the colliders array
 	void RemoveCollider(Collider* collider);
+
+	void RemoveColliderType(Collider::Type type);
 
 	// Draws all existing colliders with some transparency
 	void DebugDraw();

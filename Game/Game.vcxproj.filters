@@ -21,6 +21,8 @@
     <ClCompile Include="Source\Collider.cpp" />
     <ClCompile Include="Source\Collisions.cpp" />
     <ClCompile Include="Source\BoxManager.cpp" />
+    <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\font.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -67,6 +69,8 @@
     <ClInclude Include="Source\Collisions.h" />
     <ClInclude Include="Source\Collider.h" />
     <ClInclude Include="Source\BoxManager.h" />
+    <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\font.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

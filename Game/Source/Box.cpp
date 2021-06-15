@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Collisions.h"
 #include "player.h"
+#include "Tiles.h"
 
 #include "Log.h"
 #include "iostream"
@@ -13,7 +14,9 @@ Box::Box(bool startEnabled) : Module(startEnabled)
 	posX = -200;
 	posY = -200;
 	box = { 27, 144, 24, 24 };
-	
+	boxOnDot = { 77, 144, 24, 24 };
+	count = true;
+
 }
 
 // Destructor
@@ -38,8 +41,12 @@ bool Box::Start()
 // Set new window title
 bool Box::Update(float dt)
 {
-
-	app->render->DrawTexture(spriteSheet, this->posX, this->posY, &box );
+	if (onDot == true)
+	{
+		app->render->DrawTexture(spriteSheet, posX, posY, &boxOnDot);
+		app->tiles->BoxOnDotCount++;
+	}
+	else  app->render->DrawTexture(spriteSheet, posX, posY, &box);
 
 	collBox->SetPos(posX, posY );
 	collBoxLeft->SetPos(posX - 24, posY);
@@ -47,6 +54,8 @@ bool Box::Update(float dt)
 	collBoxUp->SetPos(posX, posY - 24);
 	collBoxDown->SetPos(posX, posY + 24);
 	
+	onDot = false;
+
 	return true;
 
 }
@@ -54,18 +63,24 @@ bool Box::Update(float dt)
 // Called before quitting
 bool Box::CleanUp()
 {
+	app->tex->UnLoad(spriteSheet);
+	app->collisions->RemoveCollider(collBox);
+	app->collisions->RemoveCollider(collBoxLeft);
+	app->collisions->RemoveCollider(collBoxRight);
+	app->collisions->RemoveCollider(collBoxUp);
+	app->collisions->RemoveCollider(collBoxDown);
 
 	return true;
 }
 
 void Box::MoveBox(int direction)
 {
-	if (direction == 4) posX++;
-	else if (direction == 1) posY--;
-	else if (direction == 2) posY++;
-	else if (direction == 3) posX--;
+	if (direction == 4) posX += 3;
+	else if (direction == 1) posY -= 3;
+	else if (direction == 2) posY += 3;
+	else if (direction == 3) posX -= 3;
 	move = true;
-}
+} 
 
 int Box::GetPos_X()
 {
@@ -89,11 +104,11 @@ void Box::SetPos_Y(int pos)
 
 void Box::OnCollision(Collider* c1, Collider* c2)
 {
+	if ((c2->type == Collider::Type::DOT) && (c1->type == Collider::Type::BOXMIDDLE)) onDot = true;
+
 	if ((c2->type == Collider::Type::PLAYER) && (c1->type == Collider::Type::BOXMIDDLE))
 	{
 		MoveBox(app->player->playerDirection());
-
-		
 	}
 
 	if ((c1->type == Collider::Type::BOX) && (!c2->type == Collider::Type::PLAYER))

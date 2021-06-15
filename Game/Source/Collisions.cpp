@@ -18,6 +18,8 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::NEAR] = true;
 	matrix[Collider::Type::WALL][Collider::Type::BOXMIDDLE] = true;
 	matrix[Collider::Type::WALL][Collider::Type::FAR] = false;
+	matrix[Collider::Type::WALL][Collider::Type::DOT] = false;
+
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
@@ -25,6 +27,8 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::NEAR] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::BOXMIDDLE] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::FAR] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::DOT] = false;
+
 
 
 	matrix[Collider::Type::BOX][Collider::Type::WALL] = true;
@@ -33,6 +37,8 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::BOX][Collider::Type::NEAR] = true;
 	matrix[Collider::Type::BOX][Collider::Type::BOXMIDDLE] = true;
 	matrix[Collider::Type::BOX][Collider::Type::FAR] = false;
+	matrix[Collider::Type::BOX][Collider::Type::DOT] = false;
+
 
 
 	matrix[Collider::Type::NEAR][Collider::Type::WALL] = true;
@@ -41,6 +47,8 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::NEAR][Collider::Type::NEAR] = false;
 	matrix[Collider::Type::NEAR][Collider::Type::BOXMIDDLE] = true;
 	matrix[Collider::Type::NEAR][Collider::Type::FAR] = false;
+	matrix[Collider::Type::NEAR][Collider::Type::DOT] = false;
+
 
 
 
@@ -50,6 +58,8 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::BOXMIDDLE][Collider::Type::NEAR] = true;
 	matrix[Collider::Type::BOXMIDDLE][Collider::Type::BOXMIDDLE] = true;
 	matrix[Collider::Type::BOXMIDDLE][Collider::Type::FAR] = true;
+	matrix[Collider::Type::BOXMIDDLE][Collider::Type::DOT] = true;
+
 
 
 	matrix[Collider::Type::FAR][Collider::Type::WALL] = false;
@@ -58,6 +68,16 @@ Collisions::Collisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::FAR][Collider::Type::NEAR] = false;
 	matrix[Collider::Type::FAR][Collider::Type::BOXMIDDLE] = true;
 	matrix[Collider::Type::FAR][Collider::Type::FAR] = false;
+	matrix[Collider::Type::FAR][Collider::Type::DOT] = false;
+
+	matrix[Collider::Type::DOT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::DOT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::DOT][Collider::Type::BOX] = false;
+	matrix[Collider::Type::DOT][Collider::Type::NEAR] = false;
+	matrix[Collider::Type::DOT][Collider::Type::BOXMIDDLE] = true;
+	matrix[Collider::Type::DOT][Collider::Type::FAR] = false;
+	matrix[Collider::Type::DOT][Collider::Type::DOT] = false;
+
 
 
 
@@ -102,7 +122,7 @@ bool Collisions::PreUpdate()
 
 			c2 = colliders[k];
 
-			if (matrix[c1->type][c2->type] && c1->Intersects(c2->rect))
+			if (matrix[c1->type][c2->type] && c1->Intersects(c2->rect) && (c2 != nullptr) && c1 != nullptr)
 			{
 				for (uint i = 0; i < MAX_LISTENERS; ++i)
 					if (c1->listeners[i] != nullptr) c1->listeners[i]->OnCollision(c1, c2);
@@ -207,6 +227,18 @@ void Collisions::RemoveCollider(Collider* collider)
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 	{
 		if (colliders[i] == collider)
+		{
+			delete colliders[i];
+			colliders[i] = nullptr;
+		}
+	}
+}
+
+void Collisions::RemoveColliderType(Collider::Type type)
+{
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+	{
+		if (colliders[i]->type == type)
 		{
 			delete colliders[i];
 			colliders[i] = nullptr;

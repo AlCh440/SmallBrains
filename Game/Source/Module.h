@@ -89,7 +89,10 @@ public:
 		}
 	}
 
-	inline bool IsEnabled() const { return isEnabled; }
+	inline bool IsEnabled()
+	{ 
+		return isEnabled; 
+	}
 
 private:
 	bool isEnabled = true;

@@ -17,6 +17,8 @@ class LevelManager;
 class Tiles;
 class Collisions;
 class BoxManager;
+class FadeToBlack;
+class Fonts;
 
 class App
 {
@@ -72,16 +74,19 @@ private:
 public:
 
 	// Modules
-	Window* win;
-	Input* input;
-	Render* render;
-	Textures* tex;
-	Audio* audio;
-	Player* player;
-	LevelManager* levelManager;
-	Tiles* tiles;
-	Collisions* collisions;
-	BoxManager* boxManager;
+	Window* win = nullptr;
+	Input* input = nullptr;
+	Render* render = nullptr;
+	Textures* tex = nullptr;
+	Audio* audio = nullptr;
+	Player* player = nullptr;
+	LevelManager* levelManager = nullptr;
+	Tiles* tiles = nullptr;
+	Collisions* collisions = nullptr;
+	BoxManager* boxManager = nullptr;
+	FadeToBlack* fadeToBlack = nullptr;
+	Fonts* fonts = nullptr;
+
 	Uint32 start;
 
 private:
